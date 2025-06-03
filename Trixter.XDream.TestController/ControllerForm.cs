@@ -92,6 +92,14 @@ namespace Trixter.XDream.TestController
                 });
             };
             this.updateTimer.AutoReset = true;
+
+            this.nudCrankRPM.Maximum = 300;
+            this.nudCrankRPM.Minimum = 0;
+            this.nudCrankRevTime.Maximum = 65534;
+            int crankTime = MappedCrankMeter.DefaultMappingRpmToRaw((int)this.nudCrankRPM.Maximum);
+            this.nudCrankRevTime.Minimum = crankTime;
+            
+
         }
 
         private void PopulateComPortBox()
@@ -220,6 +228,8 @@ namespace Trixter.XDream.TestController
 
         private void tbCrankSpeed_ValueChanged(object sender, System.EventArgs e)
         {
+            int? flywheelUpdate = null;
+
             this.DoWithSuppressedEvents(() =>
             {
                 int rpm;
@@ -243,7 +253,17 @@ namespace Trixter.XDream.TestController
 
                 this.controller.CrankRPM = rpm;
 
+                if (this.cbConnectCrank.Checked)
+                {
+                    var expectedFlywheelSpeed = Controller.GearRatio * rpm;
+                    if (this.tbFlywheelSpeed.Value < expectedFlywheelSpeed)
+                        flywheelUpdate = expectedFlywheelSpeed;
+                }
+
             });
+
+            if (flywheelUpdate.HasValue)
+                this.tbFlywheelSpeed.Value = flywheelUpdate.Value;
         }
 
         private void Controller_CrankPositionChanged(Controller sender, int delta)

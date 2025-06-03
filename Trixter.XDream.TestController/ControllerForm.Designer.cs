@@ -86,6 +86,7 @@ namespace Trixter.XDream.TestController
             this.tsbDisconnect = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.cbConnectCrank = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.tbFlywheelSpeed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbSteering)).BeginInit();
             this.gbControls.SuspendLayout();
@@ -663,6 +664,7 @@ namespace Trixter.XDream.TestController
             // 
             // gbFlywheel
             // 
+            this.gbFlywheel.Controls.Add(this.cbConnectCrank);
             this.gbFlywheel.Controls.Add(this.lbRPM);
             this.gbFlywheel.Controls.Add(this.lbFlywheelRevTime);
             this.gbFlywheel.Controls.Add(this.nudRPM);
@@ -773,7 +775,7 @@ namespace Trixter.XDream.TestController
             this.nudCrankRPM.Location = new System.Drawing.Point(100, 151);
             this.nudCrankRPM.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.nudCrankRPM.Maximum = new decimal(new int[] {
-            300,
+            200,
             0,
             0,
             0});
@@ -781,7 +783,7 @@ namespace Trixter.XDream.TestController
             this.nudCrankRPM.Size = new System.Drawing.Size(108, 26);
             this.nudCrankRPM.TabIndex = 20;
             this.nudCrankRPM.Value = new decimal(new int[] {
-            300,
+            200,
             0,
             0,
             0});
@@ -791,7 +793,7 @@ namespace Trixter.XDream.TestController
             // 
             this.tbCrankSpeed.Location = new System.Drawing.Point(9, 29);
             this.tbCrankSpeed.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tbCrankSpeed.Maximum = 300;
+            this.tbCrankSpeed.Maximum = 200;
             this.tbCrankSpeed.Name = "tbCrankSpeed";
             this.tbCrankSpeed.Orientation = System.Windows.Forms.Orientation.Vertical;
             this.tbCrankSpeed.Size = new System.Drawing.Size(69, 380);
@@ -809,9 +811,19 @@ namespace Trixter.XDream.TestController
             0,
             0,
             0});
+            this.nudCrankRevTime.Minimum = new decimal(new int[] {
+            833,
+            0,
+            0,
+            0});
             this.nudCrankRevTime.Name = "nudCrankRevTime";
             this.nudCrankRevTime.Size = new System.Drawing.Size(108, 26);
             this.nudCrankRevTime.TabIndex = 19;
+            this.nudCrankRevTime.Value = new decimal(new int[] {
+            833,
+            0,
+            0,
+            0});
             // 
             // tsToolStrip
             // 
@@ -871,6 +883,18 @@ namespace Trixter.XDream.TestController
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 34);
+            // 
+            // cbConnectCrank
+            // 
+            this.cbConnectCrank.Checked = true;
+            this.cbConnectCrank.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbConnectCrank.Location = new System.Drawing.Point(100, 187);
+            this.cbConnectCrank.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cbConnectCrank.Name = "cbConnectCrank";
+            this.cbConnectCrank.Size = new System.Drawing.Size(120, 60);
+            this.cbConnectCrank.TabIndex = 19;
+            this.cbConnectCrank.Text = "Connect Crank";
+            this.cbConnectCrank.UseVisualStyleBackColor = true;
             // 
             // ControllerForm
             // 
@@ -974,6 +998,7 @@ namespace Trixter.XDream.TestController
         private Diagnostics.Controls.ValueBar vblResistance;
         private System.Windows.Forms.Label lb0;
         private System.Windows.Forms.Label lb250;
+        private System.Windows.Forms.CheckBox cbConnectCrank;
     }
 }
 

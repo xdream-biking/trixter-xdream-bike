@@ -8,6 +8,8 @@ namespace Trixter.XDream.TestController
 {
     class Controller
     {
+        internal const int GearRatio = 5;
+
         private XDreamSerialPortServer server;
         private AutoCranker autoCranker;
         private System.Timers.Timer crankTimer;
@@ -43,12 +45,12 @@ namespace Trixter.XDream.TestController
             {
                 this.autoCranker.RPM = value;
                 this.crankTimer.Stop();
-                this.crankTimer.Interval = this.autoCranker.MillisecondsPerPosition;
+                this.crankTimer.Interval = value==0 ? 1: this.autoCranker.MillisecondsPerPosition;
                 
                 if (value > 0)
                     this.crankTimer.Start();
                 else                
-                    this.CrankTimer_Elapsed(this.crankTimer, null);
+                    this.AutoCranker_CrankPositionChanged(this.autoCranker, 0); // notify with 0 delta when stopped
             }
         }
 
