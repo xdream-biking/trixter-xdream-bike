@@ -1,10 +1,9 @@
 # trixter-xdream-bike
+An API and diagnostic utility for interaction with a Trixter X-Dream Exercise Bike for use on modern PCs, not the original Trixter ones.
 
-_This page refers to the state of this repo's product in this development branch. It has not been released yet._
+<img src="https://github.com/user-attachments/assets/fa2f2039-3b30-40ff-b4bc-5f4e064b09eb" align="center" width="420" />
+<img src="https://github.com/user-attachments/assets/e77f5ab9-b3bb-4578-b2cb-ce7d3d26bd64" align="center" width="320" />
 
-An API and diagnostic utility for interaction with a Trixter X-Dream V1 Exercise Bike for use on modern PCs, not the original Trixter ones.
-
-<img src="https://github.com/user-attachments/assets/fa2f2039-3b30-40ff-b4bc-5f4e064b09eb" align="center" width="512" />
 
 Also, a [discussion forum](https://github.com/xdream-biking/trixter-xdream-bike/discussions) and [wiki](https://github.com/xdream-biking/trixter-xdream-bike/wiki) for the X-Dream Mountain Biking software supplied with that bike.
 It is not necessary to use the diagnostic utility from this repository to utilise the advice in the discussions or wiki.
@@ -23,22 +22,21 @@ Help with the X-Dream mountain biking simulation software itself can be found in
 # Trixer.XDream.API
 
 A .NET Standard 2.0 client API which provides classes to:
-- read status from and send resistance to a Trixter V1 X-Dream Bike.
-- emulate a Trixter V1 X-Dream Bike.
+- read status from and send resistance to a Trixter X-Dream Bike.
+- emulate a Trixter X-Dream Bike.
 
 # Trixter.XDream.Diagnostics
 
 A replacement for the console and UI test applications that were supplied with the X-Dream software.
 
 So far the improvements over the originals are:
-- console and GUI options in a single application
+- graphic user interface
 - detects the COM port the bike is on
 - detects backpedalling and shows the crank RPM in the backwards direction
 - calculates flywheel and crank cumulative revolutions.
-- estimates of the power being applied to the flywheel
-- estimated energy expended by rider
+- estimate of the power being applied to the flywheel from a power table of crank speed and resistance to power.
+- estimate of energy expended by rider
 - shows an animated graph of crank positions covered to indicate sensor problems
-- captures incoming telemetry from the bike and saves to .csv
 - is maintainable
 
 ## Details Tab
