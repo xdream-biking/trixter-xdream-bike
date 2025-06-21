@@ -59,16 +59,11 @@ https://github.com/user-attachments/assets/91aed2b2-9df8-48e2-b423-215dfc9cc127
 
 This tab provides an opinion on the state of the bike's driver.
 
+![image](https://github.com/user-attachments/assets/ebefb94b-fa13-4ba3-b6ae-a7533c6b3fac)
+
 ## Data capture
 
 Incoming data from the bike can be captured and eventually saved as a .csv file.
-
-
-
-
-
-
-
 
 
 
