@@ -1,4 +1,7 @@
 # trixter-xdream-bike
+
+_This page refers to the state of this repo's product in this development branch. It has not been released yet._
+
 An API and diagnostic utility for interaction with a [Trixter X-Dream V1 Exercise Bike](https://www.fitness-superstore.co.uk/trixter-x-dream-interactive-cycle.html?srsltid=AfmBOordW7PsloHL8RKlVXtx-OaFRG_An2XVoBbJ6AoqQxZI8U71C178) for use on modern PCs, not the original Trixter ones.
 
 Also, a [discussion forum](https://github.com/xdream-biking/trixter-xdream-bike/discussions) and [wiki](https://github.com/xdream-biking/trixter-xdream-bike/wiki) for the X-Dream Mountain Biking software supplied with that bike.
@@ -32,17 +35,35 @@ So far the improvements over the originals are:
 - calculates flywheel and crank cumulative revolutions.
 - estimates of the power being applied to the flywheel
 - estimated energy expended by rider
+- shows an animated graph of crank positions covered to indicate sensor problems
+- captures incoming telemetry from the bike and saves to .csv
 - is maintainable
 
-The default mode of the utility has a graphic user interface that shows the state of the various controls and a slider bar to set flywheel resistance.
+## Details Tab
+
+The utility has a graphic user interface that shows the state of the various controls and a slider bar to set flywheel resistance.
 Each brake applies 50% flywheel resistance.
 
-![image](https://user-images.githubusercontent.com/29954900/162640166-e0d6912e-a6b0-4f4a-92c7-48d8626969c6.png)
+![image](https://github.com/user-attachments/assets/ef9ad901-cbdc-49e5-85c2-0d8c1befb8f7)
 
-The utility also has a console mode to provide a similar experience to the original.
-If the utility is invoked with the --console command line option, or through the program menu short cut for the console mode, it shows a console application.
+## Crank Tab
 
-![image](https://user-images.githubusercontent.com/29954900/148430888-c37726aa-3c2b-47d3-87fc-34d3f5ecd4e9.png)
+The Crank tab shows information about activation from the crank position sensor, to show if graphically if there is a problem with the crank sensor. 
+This could also be done by turning the crank very slowly and watching the crank position number on the Diagnostics tab or the test utility supplied with the X-Dream software.
+
+https://github.com/user-attachments/assets/91aed2b2-9df8-48e2-b423-215dfc9cc127
+
+## Driver Tab
+
+This tab provides an opinion on the state of the bike's driver.
+
+## Data capture
+
+Incoming data from the bike can be captured and eventually saved as a .csv file.
+
+
+
+
 
 
 
