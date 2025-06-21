@@ -50,7 +50,7 @@ Each brake applies 50% flywheel resistance.
 
 ## Crank Tab
 
-The Crank tab shows information about activation from the crank position sensor, to show if graphically if there is a problem with the crank sensor. 
+The Crank tab shows information about activation from the crank position sensor, to show graphically if there is a problem with the crank sensor. 
 This could also be done by turning the crank very slowly and watching the crank position number on the Diagnostics tab or the test utility supplied with the X-Dream software.
 
 https://github.com/user-attachments/assets/91aed2b2-9df8-48e2-b423-215dfc9cc127
