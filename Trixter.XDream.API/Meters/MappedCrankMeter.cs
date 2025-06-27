@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Trixter.XDream.API.Crank;
 
 namespace Trixter.XDream.API.Meters
 {
@@ -18,6 +19,8 @@ namespace Trixter.XDream.API.Meters
         private DateTimeOffset lastUpdate;
 
         public bool HasData { get; private set; }
+
+        public ICrankSpecification CrankSpecification => new XDreamCrankSpecification();
 
         public CrankDirection Direction { get; private set; }
 
@@ -40,7 +43,7 @@ namespace Trixter.XDream.API.Meters
         {
             getValue = getValue ?? DefaultMappingRawToRpm;
 
-            this.mapToRpm = Enumerable.Range(CrankPositions.MinCrankTimeReading, CrankPositions.MaxCrankTimeReading - CrankPositions.MinCrankTimeReading + 1)
+            this.mapToRpm = Enumerable.Range(this.CrankSpecification.MinRawDataReading, this.CrankSpecification.MaxRawDataReading - this.CrankSpecification.MinRawDataReading + 1)
                 .Select(x => getValue(x)).ToArray();
         }
 
@@ -51,10 +54,10 @@ namespace Trixter.XDream.API.Meters
 
             this.HasData = true;
             
-            if(!CrankPositions.IsValidCrankPosition(crankPosition))
+            if(!this.CrankSpecification.IsValidCrankPosition(crankPosition))
                 throw new ArgumentOutOfRangeException(nameof(crankPosition));
 
-            if(!CrankPositions.IsValidCrankTimeReading(rawData))
+            if(!CrankSpecification.IsValidRawDataReading(rawData))
                 throw new ArgumentOutOfRangeException(nameof(rawData));
 
             this.CrankPosition = crankPosition;

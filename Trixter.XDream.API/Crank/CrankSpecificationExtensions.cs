@@ -1,43 +1,33 @@
 ﻿using System;
 
-namespace Trixter.XDream.API
+namespace Trixter.XDream.API.Crank
 {
-    public static class CrankPositions
+    public static class CrankSpecificationExtensions
     {
-        public const int MinCrankPosition = 1;
-        public const int MaxCrankPosition = 60;
-        public const int Positions = MaxCrankPosition - MinCrankPosition + 1;
 
-        public const double RadiansPerPosition = 2 * Math.PI / Positions;
-
-        public const int MaxCrankTimeReading = 65535; // No movement
-        public const int MinCrankTimeReading = 0; // No movement
-
-        public const double RevolutionsPerPosition = 1d / Positions;
+        /// <summary>
+        /// Determines if the specified value is a valid crank raw data reading.
+        /// </summary>
+        /// <param name="crankTimeReading"></param>
+        /// <returns></returns>
+        public static bool IsValidRawDataReading(this ICrankSpecification crank, int value)
+            => value >= crank.MinRawDataReading && value <= crank.MaxRawDataReading;
 
         /// <summary>
         /// Determines if the specified value is a valid crank position.
         /// </summary>
         /// <param name="crankPosition"></param>
         /// <returns></returns>
-        public static bool IsValidCrankPosition(int crankPosition)
-            => crankPosition >= MinCrankPosition && crankPosition <= MaxCrankPosition;
-
-
-        /// <summary>
-        /// Determines if the specified value is a valid crank time reading.
-        /// </summary>
-        /// <param name="crankTimeReading"></param>
-        /// <returns></returns>
-        public static bool IsValidCrankTimeReading(int crankTimeReading)
-            => crankTimeReading >= MinCrankTimeReading && crankTimeReading <= MaxCrankTimeReading;
+        public static bool IsValidCrankPosition(this ICrankSpecification crank, int crankPosition)
+            => crankPosition >= crank.MinCrankPosition && crankPosition <= crank.MaxCrankPosition;
+        
 
         /// <summary>
         /// Determine a crank direction from an integer position change or directional measurement.
         /// </summary>
         /// <param name="x"></param>
         /// <returns></returns>
-        public static CrankDirection GetDirection(int x)
+        public static CrankDirection GetDirection(this ICrankSpecification crank, int x)
         {
             if (x == 0) return CrankDirection.None;
             if (x > 0) return CrankDirection.Forward;
@@ -51,15 +41,15 @@ namespace Trixter.XDream.API
         /// <param name="position1"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
-        public static int CrankDelta(int position0, int position1)
+        public static int CrankDelta(this ICrankSpecification crank, int position0, int position1)
         {
-            if (!IsValidCrankPosition(position0))
+            if (!IsValidCrankPosition(crank, position0))
                 throw new ArgumentOutOfRangeException(nameof(position0));
-            if (!IsValidCrankPosition(position1))
+            if (!IsValidCrankPosition(crank,position1))
                 throw new ArgumentOutOfRangeException(nameof(position1));
 
             int result = position1 - position0;
-            if (result < 0) result += MaxCrankPosition;
+            if (result < 0) result += crank.MaxCrankPosition;
             return result;
         }
 
@@ -73,7 +63,7 @@ namespace Trixter.XDream.API
         /// <param name="forceDirection">Optional parameter to force a particular direction.
         /// Should not be <see cref="CrankDirection.None"/>.</param>
         /// <returns></returns>
-        public static int DirectionalCrankDelta(int position0, int position1, CrankDirection? forceDirection=null)
+        public static int DirectionalCrankDelta(this ICrankSpecification crank, int position0, int position1, CrankDirection? forceDirection=null)
         {
             if (position0 == position1)
             {
@@ -86,13 +76,13 @@ namespace Trixter.XDream.API
                 if (direction == CrankDirection.None)
                     throw new ArgumentException(nameof(forceDirection));
                 if (direction == CrankDirection.Forward)
-                    return CrankPositions.CrankDelta(position0, position1);
-                return -CrankPositions.CrankDelta(position1, position0);
+                    return CrankDelta(crank, position0, position1);
+                return -CrankDelta(crank, position1, position0);
             }
             else
             {
-                int forwardDiff = CrankPositions.CrankDelta(position0, position1);
-                int backwardDiff = -CrankPositions.CrankDelta(position1, position0);
+                int forwardDiff = CrankDelta(crank, position0, position1);
+                int backwardDiff = -CrankDelta(crank, position1, position0);
 
                 return (Math.Abs(forwardDiff) < Math.Abs(backwardDiff)) ? forwardDiff : backwardDiff;
             }
@@ -104,22 +94,22 @@ namespace Trixter.XDream.API
         /// <param name="position">The initial position.</param>
         /// <param name="delta">The change. Can be negative for backward motion.</param>
         /// <returns></returns>
-        public static int Add(int position, int delta)
+        public static int Advance(this ICrankSpecification crank, int position, int delta)
         {
-            if (!IsValidCrankPosition(position))
+            if (!IsValidCrankPosition(crank, position))
                 throw new ArgumentOutOfRangeException(nameof(position));
 
             if(delta==0)
                 return position;
             
-            int result = position-MinCrankPosition + delta;
+            int result = position-crank.MinCrankPosition + delta;
 
-            if(Math.Abs(result)>=Positions)
-                result %= Positions;
+            if(Math.Abs(result)>=crank.Positions)
+                result %= crank.Positions;
 
             if (result < 0)
-                result += Positions;
-            result += MinCrankPosition;
+                result += crank.Positions;
+            result += crank.MinCrankPosition;
 
             return result;
 
@@ -131,11 +121,11 @@ namespace Trixter.XDream.API
         /// <param name="positions"></param>
         /// <param name="milliseconds"></param>
         /// <returns></returns>
-        public static int CalculateRPM(double positions, double milliseconds)
+        public static int CalculateRPM(this ICrankSpecification crank, double positions, double milliseconds)
         {
             double crankPositionsPerMillisecond = Math.Abs((double)positions / milliseconds);
             double crankPositionsPerMinute = Constants.MillisecondsPerMinute * crankPositionsPerMillisecond;
-            var result= (int)(0.5 + RevolutionsPerPosition * crankPositionsPerMinute);
+            var result= (int)(0.5 + crank.RevolutionsPerPosition * crankPositionsPerMinute);
             return result;
         }
 
@@ -145,12 +135,11 @@ namespace Trixter.XDream.API
         /// <param name="positions"></param>
         /// <param name="milliseconds"></param>
         /// <returns></returns>
-        public static double CalculateRadiansPerSecond(double positions, double milliseconds)
+        public static double CalculateRadiansPerSecond(this ICrankSpecification crank, double positions, double milliseconds)
         {
             double crankPositionsPerMillisecond = Math.Abs((double)positions / milliseconds);
             double crankPositionsPerSecond = Constants.MillisecondsPerSecond * crankPositionsPerMillisecond;
-            return crankPositionsPerSecond * RadiansPerPosition;
+            return crankPositionsPerSecond * crank.RadiansPerPosition;
         }
     }
-
 }

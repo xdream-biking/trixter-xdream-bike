@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using Trixter.XDream.API.Crank;
 using Trixter.XDream.API.Meters;
 
 namespace Trixter.XDream.API.Testing.Meters
@@ -8,7 +9,8 @@ namespace Trixter.XDream.API.Testing.Meters
     [TestFixture]
     public class CrankMeterTests
     {
-        
+        private static readonly ICrankSpecification crankSpec = XDreamCrankSpecification.Default;
+
         [Test(Description ="Test that if a timestamp later than one that has already been received is passed, an ArgumentException is thrown.")]
         [TestCase(typeof(PositionalCrankMeter))]
         [TestCase(typeof(MappedCrankMeter))]
@@ -20,7 +22,7 @@ namespace Trixter.XDream.API.Testing.Meters
             DateTimeOffset t0 = DateTimeOffset.UtcNow;
 
             cs.AddData(t0, 1, 0);
-            Assert.Throws<ArgumentException>(() => cs.AddData(t0.AddMilliseconds(-1), 2, CrankPositions.MinCrankTimeReading));
+            Assert.Throws<ArgumentException>(() => cs.AddData(t0.AddMilliseconds(-1), 2, crankSpec.MinRawDataReading));
 
         }
 
@@ -51,12 +53,12 @@ namespace Trixter.XDream.API.Testing.Meters
 
             double dt= sampleIntervalMilliseconds;  
             double dp_dt = 0.01 * rpm;
-            double t = 0, p = CrankPositions.MinCrankPosition;
+            double t = 0, p = crankSpec.MinCrankPosition;
 
             XDreamStateBuilder builder = new XDreamStateBuilder
             {
                 Crank = rpm > 0 ? Math.Min(65535, Math.Max(0, rpmToRaw(rpm))) : 0,
-                CrankPosition = CrankPositions.MinCrankPosition
+                CrankPosition = crankSpec.MinCrankPosition
             };
 
             List<XDreamState> result = new List<XDreamState>();
@@ -64,7 +66,7 @@ namespace Trixter.XDream.API.Testing.Meters
             while(t<lengthMilliseconds)
             {
                 if ((int)p != builder.CrankPosition)
-                    builder.CrankPosition = CrankPositions.Add(builder.CrankPosition, (int)p - builder.CrankPosition);
+                    builder.CrankPosition = crankSpec.Advance(builder.CrankPosition, (int)p - builder.CrankPosition);
                 builder.Flywheel = flywheelReading((int)t);
                 builder.TimeStamp = startTimestamp.AddMilliseconds(t);
             

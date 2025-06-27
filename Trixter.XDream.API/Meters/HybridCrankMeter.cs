@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using Trixter.XDream.API.Crank;
 
 namespace Trixter.XDream.API.Meters
 {
@@ -40,6 +41,7 @@ namespace Trixter.XDream.API.Meters
         protected ICrankMeter Current { get; set; }
 
 
+  
         public HybridCrankMeter() : this(null)
         {
 
@@ -48,7 +50,7 @@ namespace Trixter.XDream.API.Meters
         public HybridCrankMeter(Func<int,int> getMappedRpm)
         {
             this.mapped = new MappedCrankMeter(getMappedRpm);
-            this.positional = new PositionalCrankMeter(1100);
+            this.positional = new PositionalCrankMeter(XDreamCrankSpecification.Default, 1100);
 
             // Start with the costly meter which can handle slow RPM and backpedalling
             this.Current = this.positional;

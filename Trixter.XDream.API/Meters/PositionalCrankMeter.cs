@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using Trixter.XDream.API.Crank;
 using Trixter.XDream.API.Filters;
 
 namespace Trixter.XDream.API.Meters
@@ -18,6 +19,8 @@ namespace Trixter.XDream.API.Meters
 
         private MeanValueFilter crankChangeFilter;
         
+        public ICrankSpecification CrankSpecification { get; }
+
         /// <summary>
         /// Indicates if the object is ready to provide data. It needs to have received 2 updates
         /// timestamped withing the limit specified by <see cref="MaximumMessageInterval"/>.
@@ -59,13 +62,17 @@ namespace Trixter.XDream.API.Meters
         /// </summary>
         public int SmoothingIntervalMilliseconds { get; private set; }
 
+        public PositionalCrankMeter() : this(XDreamCrankSpecification.Default)
+        {
 
-        public PositionalCrankMeter() : this(DefaultSmoothingIntervalMilliseconds)
+        }
+
+        public PositionalCrankMeter(ICrankSpecification crankSpecification) : this(crankSpecification, DefaultSmoothingIntervalMilliseconds)
         {
                 
         }
 
-        public PositionalCrankMeter(int smoothingIntervalMilliseconds)
+        public PositionalCrankMeter(ICrankSpecification crankSpecification, int smoothingIntervalMilliseconds)
         {
             if (smoothingIntervalMilliseconds < MinimumSmoothingIntervalMilliseconds || smoothingIntervalMilliseconds>MaximumSmoothingIntervalMilliseconds)
                 throw new ArgumentOutOfRangeException(nameof(smoothingIntervalMilliseconds), 
@@ -73,6 +80,7 @@ namespace Trixter.XDream.API.Meters
 
             this.crankChangeFilter = new MeanValueFilter(smoothingIntervalMilliseconds);
             this.SmoothingIntervalMilliseconds = smoothingIntervalMilliseconds;
+            this.CrankSpecification = crankSpecification ?? throw new ArgumentNullException(nameof(crankSpecification));
         }
      
         public void Reset()
@@ -87,7 +95,7 @@ namespace Trixter.XDream.API.Meters
         public void AddData(DateTimeOffset timestamp, int crankPosition, int crankRevolutionTime)
         {
             // Prevent invalid crank positions
-            if (!CrankPositions.IsValidCrankPosition(crankPosition))
+            if (!this.CrankSpecification.IsValidCrankPosition(crankPosition))
                 throw new ArgumentOutOfRangeException(nameof(crankPosition));            
 
             // Ensure the sample is in the right order
@@ -108,15 +116,15 @@ namespace Trixter.XDream.API.Meters
             }
 
             // Update the change in position
-            int dp = CrankPositions.DirectionalCrankDelta(this.CrankPosition, crankPosition);
+            int dp = CrankSpecification.DirectionalCrankDelta(this.CrankPosition, crankPosition);
 
             // Use the AddDelta method because dp is not necessarily new crank position - old crank position
             this.crankChangeFilter.AddDelta(dp, timestamp);
 
             // Calculate the properties
             double crankChangesPerMillisecond = this.crankChangeFilter.DeltaPerMillisecond;
-            this.Direction = CrankPositions.GetDirection(Math.Sign(crankChangesPerMillisecond));
-            this.AngularVelocity = CrankPositions.CalculateRadiansPerSecond(crankChangesPerMillisecond, 1);
+            this.Direction = CrankSpecification.GetDirection(Math.Sign(crankChangesPerMillisecond));
+            this.AngularVelocity = CrankSpecification.CalculateRadiansPerSecond(crankChangesPerMillisecond, 1);
              
             this.HasData = true;
             this.CrankPosition = crankPosition;

@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 using Trixter.XDream.API;
+using Trixter.XDream.API.Crank;
 
 namespace Trixter.XDream.Diagnostics.Controls
 {
@@ -14,9 +15,11 @@ namespace Trixter.XDream.Diagnostics.Controls
         const int updateIntervalMilliseconds = 500;
         const int currentPositionIntervalMilliseconds = 1000;
 
+        private static readonly ICrankSpecification CrankSpecification = XDreamCrankSpecification.Default;
+
         object sync = new object();
 
-        long[] crankPositionVisits = new long[CrankPositions.MaxCrankPosition];
+        long[] crankPositionVisits = new long[CrankSpecification.MaxCrankPosition];
         Label[] labels;
         Color unvisited = Color.Red, visited = Color.Black, current = Color.DodgerBlue;
         bool paused = false;
@@ -34,9 +37,9 @@ namespace Trixter.XDream.Diagnostics.Controls
 
             this.lbCurrent.Text = $"Reported within {currentPositionIntervalMilliseconds}ms";
 
-            this.labels = new Label[CrankPositions.MaxCrankPosition];
+            this.labels = new Label[CrankSpecification.MaxCrankPosition];
 
-            for (int i = 0; i < CrankPositions.MaxCrankPosition; i++)
+            for (int i = 0; i < CrankSpecification.MaxCrankPosition; i++)
             {
                 var position = (i + 1).ToString();
 
@@ -71,9 +74,9 @@ namespace Trixter.XDream.Diagnostics.Controls
 
             Point origin = new Point((clientSize.Width - labelSize) >> 1, (clientSize.Height - labelSize) >> 1);
 
-            for (int i = 0; i < CrankPositions.MaxCrankPosition; i++)
+            for (int i = 0; i < CrankSpecification.MaxCrankPosition; i++)
             {
-                double angle = i * CrankPositions.RadiansPerPosition;
+                double angle = i * CrankSpecification.RadiansPerPosition;
 
                 int y = origin.Y + (int)(Math.Sin(angle) * C);
                 int x = origin.X + (int)(Math.Cos(angle) * C);
@@ -91,7 +94,7 @@ namespace Trixter.XDream.Diagnostics.Controls
         {
             lock (this.sync)
             {
-                this.crankPositionVisits = new long[CrankPositions.MaxCrankPosition];
+                this.crankPositionVisits = new long[CrankSpecification.MaxCrankPosition];
                 this.UpdateSeries(true);
                 this.Invalidate();
             }
