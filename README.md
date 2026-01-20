@@ -1,8 +1,8 @@
 # trixter-xdream-bike
 An API and diagnostic utility for interaction with a Trixter X-Dream Exercise Bike for use on modern PCs, not the original Trixter ones.
 
-<img src="https://github.com/user-attachments/assets/fa2f2039-3b30-40ff-b4bc-5f4e064b09eb" align="center" width="512" />
-<img width="320" alt="image" src="https://github.com/user-attachments/assets/e77f5ab9-b3bb-4578-b2cb-ce7d3d26bd64" />
+<img src="https://github.com/user-attachments/assets/fa2f2039-3b30-40ff-b4bc-5f4e064b09eb" align="center" width="420" />
+<img src="https://github.com/user-attachments/assets/e77f5ab9-b3bb-4578-b2cb-ce7d3d26bd64" align="center" width="320" />
 
 
 Also, a [discussion forum](https://github.com/xdream-biking/trixter-xdream-bike/discussions) and [wiki](https://github.com/xdream-biking/trixter-xdream-bike/wiki) for the X-Dream Mountain Biking software supplied with that bike.
@@ -22,7 +22,7 @@ Help with the X-Dream mountain biking simulation software itself can be found in
 # Trixer.XDream.API
 
 A .NET Standard 2.0 client API which provides classes to:
-- read status from and send resistance to a Trixter V1 X-Dream Bike.
+- read status from and send resistance to a Trixter X-Dream Bike.
 - emulate a Trixter V1 X-Dream Bike.
 
 # Trixter.XDream.Diagnostics
