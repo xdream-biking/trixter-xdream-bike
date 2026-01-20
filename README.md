@@ -1,7 +1,8 @@
 # trixter-xdream-bike
-An API and diagnostic utility for interaction with a Trixter X-Dream V1 Exercise Bike for use on modern PCs, not the original Trixter ones.
+An API and diagnostic utility for interaction with a Trixter X-Dream Exercise Bike for use on modern PCs, not the original Trixter ones.
 
 <img src="https://github.com/user-attachments/assets/fa2f2039-3b30-40ff-b4bc-5f4e064b09eb" align="center" width="512" />
+<img width="320" alt="image" src="https://github.com/user-attachments/assets/e77f5ab9-b3bb-4578-b2cb-ce7d3d26bd64" />
 
 
 Also, a [discussion forum](https://github.com/xdream-biking/trixter-xdream-bike/discussions) and [wiki](https://github.com/xdream-biking/trixter-xdream-bike/wiki) for the X-Dream Mountain Biking software supplied with that bike.
