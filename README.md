@@ -10,7 +10,7 @@ It is not necessary to use the diagnostic utility from this repository to utilis
 
 ---
 
-The "Trixter" company or companies that made this bike and the X-Dream mountain biking simulator are now dissolved.  
+The "Trixter" company or companies that made this bike and the X-Dream mountain biking simulator provided with the V1 bike are now dissolved.  
 This repository and the associated discussions / wikis are not associated with these companies or any that acquired them.
 
 ---
@@ -59,9 +59,7 @@ This tab provides an opinion on the state of the bike's driver.
 
 ![image](https://github.com/user-attachments/assets/ebefb94b-fa13-4ba3-b6ae-a7533c6b3fac)
 
-## Data capture
 
-Incoming data from the bike can be captured and eventually saved as a .csv file.
 
 
 
