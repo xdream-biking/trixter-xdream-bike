@@ -9,10 +9,11 @@
 
     <Authors>David Mason</Authors>
 
-    <Copyright>(C) David Mason 2021-2022</Copyright>
-	<AssemblyVersion>1.0.1</AssemblyVersion>
+    <Copyright>(C) David Mason 2021-2026</Copyright>
+    <AssemblyVersion>1.0.1</AssemblyVersion>
     <FileVersion>1.0.1</FileVersion>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <IsTestingProject>true</IsTestingProject>
   </PropertyGroup>
 
   <ItemGroup>
