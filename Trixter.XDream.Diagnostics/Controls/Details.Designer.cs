@@ -83,21 +83,21 @@
             this.gbOutput.Controls.Add(this.cbApplyBrakes);
             this.gbOutput.Controls.Add(this.lbResistance);
             this.gbOutput.Controls.Add(this.tbResistance);
-            this.gbOutput.Location = new System.Drawing.Point(530, 0);
-            this.gbOutput.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.gbOutput.Location = new System.Drawing.Point(471, 0);
+            this.gbOutput.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.gbOutput.Name = "gbOutput";
-            this.gbOutput.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.gbOutput.Size = new System.Drawing.Size(214, 665);
+            this.gbOutput.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbOutput.Size = new System.Drawing.Size(190, 532);
             this.gbOutput.TabIndex = 7;
             this.gbOutput.TabStop = false;
             this.gbOutput.Text = "To Device";
             // 
             // lbAppliedResistance
             // 
-            this.lbAppliedResistance.Location = new System.Drawing.Point(112, 86);
+            this.lbAppliedResistance.Location = new System.Drawing.Point(100, 69);
             this.lbAppliedResistance.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbAppliedResistance.Name = "lbAppliedResistance";
-            this.lbAppliedResistance.Size = new System.Drawing.Size(92, 51);
+            this.lbAppliedResistance.Size = new System.Drawing.Size(82, 41);
             this.lbAppliedResistance.TabIndex = 4;
             this.lbAppliedResistance.Text = "Applied Resistance";
             this.lbAppliedResistance.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -107,12 +107,12 @@
             this.vbActualResistance.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.vbActualResistance.ClipOutOfRangeValues = true;
             this.vbActualResistance.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.vbActualResistance.Location = new System.Drawing.Point(124, 149);
+            this.vbActualResistance.Location = new System.Drawing.Point(110, 119);
             this.vbActualResistance.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.vbActualResistance.Maximum = 250;
             this.vbActualResistance.Name = "vbActualResistance";
             this.vbActualResistance.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.vbActualResistance.Size = new System.Drawing.Size(34, 489);
+            this.vbActualResistance.Size = new System.Drawing.Size(30, 391);
             this.vbActualResistance.TabIndex = 3;
             this.vbActualResistance.Text = "valueBar1";
             this.vbActualResistance.Value = 0;
@@ -122,32 +122,32 @@
             this.cbApplyBrakes.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.cbApplyBrakes.Checked = true;
             this.cbApplyBrakes.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbApplyBrakes.Location = new System.Drawing.Point(12, 32);
-            this.cbApplyBrakes.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cbApplyBrakes.Location = new System.Drawing.Point(11, 26);
+            this.cbApplyBrakes.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbApplyBrakes.Name = "cbApplyBrakes";
-            this.cbApplyBrakes.Size = new System.Drawing.Size(183, 37);
+            this.cbApplyBrakes.Size = new System.Drawing.Size(163, 30);
             this.cbApplyBrakes.TabIndex = 0;
             this.cbApplyBrakes.Text = "Apply Brakes";
             this.cbApplyBrakes.UseVisualStyleBackColor = true;
             // 
             // lbResistance
             // 
-            this.lbResistance.Location = new System.Drawing.Point(12, 86);
+            this.lbResistance.Location = new System.Drawing.Point(11, 69);
             this.lbResistance.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbResistance.Name = "lbResistance";
-            this.lbResistance.Size = new System.Drawing.Size(92, 51);
+            this.lbResistance.Size = new System.Drawing.Size(82, 41);
             this.lbResistance.TabIndex = 1;
             this.lbResistance.Text = "Base Resistance";
             this.lbResistance.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // tbResistance
             // 
-            this.tbResistance.Location = new System.Drawing.Point(33, 132);
-            this.tbResistance.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tbResistance.Location = new System.Drawing.Point(29, 106);
+            this.tbResistance.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbResistance.Maximum = 250;
             this.tbResistance.Name = "tbResistance";
             this.tbResistance.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.tbResistance.Size = new System.Drawing.Size(69, 523);
+            this.tbResistance.Size = new System.Drawing.Size(56, 418);
             this.tbResistance.TabIndex = 1;
             this.tbResistance.TickFrequency = 5;
             this.tbResistance.TickStyle = System.Windows.Forms.TickStyle.Both;
@@ -187,10 +187,10 @@
             this.gbInput.Controls.Add(this.lbSteering);
             this.gbInput.Controls.Add(this.clbButtons);
             this.gbInput.Location = new System.Drawing.Point(0, 0);
-            this.gbInput.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.gbInput.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.gbInput.Name = "gbInput";
-            this.gbInput.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.gbInput.Size = new System.Drawing.Size(520, 665);
+            this.gbInput.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbInput.Size = new System.Drawing.Size(462, 532);
             this.gbInput.TabIndex = 6;
             this.gbInput.TabStop = false;
             this.gbInput.Text = "From Device";
@@ -198,10 +198,10 @@
             // lbTotalEnergy
             // 
             this.lbTotalEnergy.AutoSize = true;
-            this.lbTotalEnergy.Location = new System.Drawing.Point(409, 443);
+            this.lbTotalEnergy.Location = new System.Drawing.Point(364, 354);
             this.lbTotalEnergy.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbTotalEnergy.Name = "lbTotalEnergy";
-            this.lbTotalEnergy.Size = new System.Drawing.Size(98, 20);
+            this.lbTotalEnergy.Size = new System.Drawing.Size(84, 16);
             this.lbTotalEnergy.TabIndex = 48;
             this.lbTotalEnergy.Text = "Total Energy";
             this.lbTotalEnergy.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -209,10 +209,10 @@
             // lbTotalEnergyValue
             // 
             this.lbTotalEnergyValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lbTotalEnergyValue.Location = new System.Drawing.Point(394, 469);
+            this.lbTotalEnergyValue.Location = new System.Drawing.Point(350, 375);
             this.lbTotalEnergyValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbTotalEnergyValue.Name = "lbTotalEnergyValue";
-            this.lbTotalEnergyValue.Size = new System.Drawing.Size(113, 36);
+            this.lbTotalEnergyValue.Size = new System.Drawing.Size(101, 29);
             this.lbTotalEnergyValue.TabIndex = 47;
             this.lbTotalEnergyValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -222,30 +222,30 @@
             this.pnRawData.Controls.Add(this.lbFlywheelTime);
             this.pnRawData.Controls.Add(this.lbFlywheelTimeValue);
             this.pnRawData.Controls.Add(this.lbCrankTime);
-            this.pnRawData.Location = new System.Drawing.Point(340, 543);
-            this.pnRawData.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.pnRawData.Location = new System.Drawing.Point(302, 434);
+            this.pnRawData.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnRawData.Name = "pnRawData";
-            this.pnRawData.Size = new System.Drawing.Size(171, 95);
+            this.pnRawData.Size = new System.Drawing.Size(152, 76);
             this.pnRawData.TabIndex = 46;
             this.pnRawData.Visible = false;
             // 
             // lbCrankTimeValue
             // 
             this.lbCrankTimeValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lbCrankTimeValue.Location = new System.Drawing.Point(78, 6);
+            this.lbCrankTimeValue.Location = new System.Drawing.Point(69, 5);
             this.lbCrankTimeValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbCrankTimeValue.Name = "lbCrankTimeValue";
-            this.lbCrankTimeValue.Size = new System.Drawing.Size(89, 36);
+            this.lbCrankTimeValue.Size = new System.Drawing.Size(79, 29);
             this.lbCrankTimeValue.TabIndex = 42;
             this.lbCrankTimeValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lbFlywheelTime
             // 
             this.lbFlywheelTime.AutoSize = true;
-            this.lbFlywheelTime.Location = new System.Drawing.Point(2, 62);
+            this.lbFlywheelTime.Location = new System.Drawing.Point(2, 50);
             this.lbFlywheelTime.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbFlywheelTime.Name = "lbFlywheelTime";
-            this.lbFlywheelTime.Size = new System.Drawing.Size(70, 20);
+            this.lbFlywheelTime.Size = new System.Drawing.Size(60, 16);
             this.lbFlywheelTime.TabIndex = 45;
             this.lbFlywheelTime.Text = "Flywheel";
             this.lbFlywheelTime.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -253,20 +253,20 @@
             // lbFlywheelTimeValue
             // 
             this.lbFlywheelTimeValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lbFlywheelTimeValue.Location = new System.Drawing.Point(78, 52);
+            this.lbFlywheelTimeValue.Location = new System.Drawing.Point(69, 42);
             this.lbFlywheelTimeValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbFlywheelTimeValue.Name = "lbFlywheelTimeValue";
-            this.lbFlywheelTimeValue.Size = new System.Drawing.Size(89, 36);
+            this.lbFlywheelTimeValue.Size = new System.Drawing.Size(79, 29);
             this.lbFlywheelTimeValue.TabIndex = 43;
             this.lbFlywheelTimeValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lbCrankTime
             // 
             this.lbCrankTime.AutoSize = true;
-            this.lbCrankTime.Location = new System.Drawing.Point(21, 14);
+            this.lbCrankTime.Location = new System.Drawing.Point(19, 11);
             this.lbCrankTime.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbCrankTime.Name = "lbCrankTime";
-            this.lbCrankTime.Size = new System.Drawing.Size(51, 20);
+            this.lbCrankTime.Size = new System.Drawing.Size(42, 16);
             this.lbCrankTime.TabIndex = 44;
             this.lbCrankTime.Text = "Crank";
             this.lbCrankTime.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -274,10 +274,10 @@
             // cbRawData
             // 
             this.cbRawData.AutoSize = true;
-            this.cbRawData.Location = new System.Drawing.Point(352, 514);
-            this.cbRawData.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cbRawData.Location = new System.Drawing.Point(313, 411);
+            this.cbRawData.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbRawData.Name = "cbRawData";
-            this.cbRawData.Size = new System.Drawing.Size(150, 24);
+            this.cbRawData.Size = new System.Drawing.Size(124, 20);
             this.cbRawData.TabIndex = 41;
             this.cbRawData.Text = "Show Raw Data";
             this.cbRawData.UseVisualStyleBackColor = true;
@@ -286,10 +286,10 @@
             // lbPower
             // 
             this.lbPower.AutoSize = true;
-            this.lbPower.Location = new System.Drawing.Point(454, 374);
+            this.lbPower.Location = new System.Drawing.Point(404, 299);
             this.lbPower.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbPower.Name = "lbPower";
-            this.lbPower.Size = new System.Drawing.Size(53, 20);
+            this.lbPower.Size = new System.Drawing.Size(45, 16);
             this.lbPower.TabIndex = 40;
             this.lbPower.Text = "Power";
             this.lbPower.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -297,20 +297,20 @@
             // lbPowerValue
             // 
             this.lbPowerValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lbPowerValue.Location = new System.Drawing.Point(394, 400);
+            this.lbPowerValue.Location = new System.Drawing.Point(350, 320);
             this.lbPowerValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbPowerValue.Name = "lbPowerValue";
-            this.lbPowerValue.Size = new System.Drawing.Size(113, 36);
+            this.lbPowerValue.Size = new System.Drawing.Size(101, 29);
             this.lbPowerValue.TabIndex = 39;
             this.lbPowerValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lbCrankRevs
             // 
             this.lbCrankRevs.AutoSize = true;
-            this.lbCrankRevs.Location = new System.Drawing.Point(369, 303);
+            this.lbCrankRevs.Location = new System.Drawing.Point(328, 242);
             this.lbCrankRevs.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbCrankRevs.Name = "lbCrankRevs";
-            this.lbCrankRevs.Size = new System.Drawing.Size(138, 20);
+            this.lbCrankRevs.Size = new System.Drawing.Size(116, 16);
             this.lbCrankRevs.TabIndex = 38;
             this.lbCrankRevs.Text = "Crank Revolutions";
             this.lbCrankRevs.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -318,20 +318,20 @@
             // lbCrankRevsValue
             // 
             this.lbCrankRevsValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lbCrankRevsValue.Location = new System.Drawing.Point(394, 329);
+            this.lbCrankRevsValue.Location = new System.Drawing.Point(350, 263);
             this.lbCrankRevsValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbCrankRevsValue.Name = "lbCrankRevsValue";
-            this.lbCrankRevsValue.Size = new System.Drawing.Size(113, 36);
+            this.lbCrankRevsValue.Size = new System.Drawing.Size(101, 29);
             this.lbCrankRevsValue.TabIndex = 37;
             this.lbCrankRevsValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lbFlywheelRevs
             // 
             this.lbFlywheelRevs.AutoSize = true;
-            this.lbFlywheelRevs.Location = new System.Drawing.Point(350, 232);
+            this.lbFlywheelRevs.Location = new System.Drawing.Point(311, 186);
             this.lbFlywheelRevs.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbFlywheelRevs.Name = "lbFlywheelRevs";
-            this.lbFlywheelRevs.Size = new System.Drawing.Size(157, 20);
+            this.lbFlywheelRevs.Size = new System.Drawing.Size(134, 16);
             this.lbFlywheelRevs.TabIndex = 36;
             this.lbFlywheelRevs.Text = "Flywheel Revolutions";
             this.lbFlywheelRevs.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -339,10 +339,10 @@
             // lbFlywheelRevsValue
             // 
             this.lbFlywheelRevsValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lbFlywheelRevsValue.Location = new System.Drawing.Point(394, 260);
+            this.lbFlywheelRevsValue.Location = new System.Drawing.Point(350, 208);
             this.lbFlywheelRevsValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbFlywheelRevsValue.Name = "lbFlywheelRevsValue";
-            this.lbFlywheelRevsValue.Size = new System.Drawing.Size(113, 36);
+            this.lbFlywheelRevsValue.Size = new System.Drawing.Size(101, 29);
             this.lbFlywheelRevsValue.TabIndex = 34;
             this.lbFlywheelRevsValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -351,12 +351,12 @@
             this.vbRightBrake.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.vbRightBrake.ClipOutOfRangeValues = true;
             this.vbRightBrake.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.vbRightBrake.Location = new System.Drawing.Point(138, 128);
+            this.vbRightBrake.Location = new System.Drawing.Point(123, 102);
             this.vbRightBrake.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.vbRightBrake.Maximum = 250;
+            this.vbRightBrake.Maximum = 100;
             this.vbRightBrake.Name = "vbRightBrake";
             this.vbRightBrake.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            this.vbRightBrake.Size = new System.Drawing.Size(294, 37);
+            this.vbRightBrake.Size = new System.Drawing.Size(261, 30);
             this.vbRightBrake.TabIndex = 33;
             this.vbRightBrake.Value = 0;
             // 
@@ -365,12 +365,12 @@
             this.vbLeftBrake.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.vbLeftBrake.ClipOutOfRangeValues = true;
             this.vbLeftBrake.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.vbLeftBrake.Location = new System.Drawing.Point(138, 82);
+            this.vbLeftBrake.Location = new System.Drawing.Point(123, 66);
             this.vbLeftBrake.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.vbLeftBrake.Maximum = 250;
+            this.vbLeftBrake.Maximum = 100;
             this.vbLeftBrake.Name = "vbLeftBrake";
             this.vbLeftBrake.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            this.vbLeftBrake.Size = new System.Drawing.Size(294, 37);
+            this.vbLeftBrake.Size = new System.Drawing.Size(261, 30);
             this.vbLeftBrake.TabIndex = 32;
             this.vbLeftBrake.Value = 0;
             // 
@@ -379,22 +379,22 @@
             this.vbSteering.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.vbSteering.ClipOutOfRangeValues = true;
             this.vbSteering.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.vbSteering.Location = new System.Drawing.Point(138, 37);
+            this.vbSteering.Location = new System.Drawing.Point(123, 30);
             this.vbSteering.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.vbSteering.Maximum = 255;
             this.vbSteering.Name = "vbSteering";
             this.vbSteering.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            this.vbSteering.Size = new System.Drawing.Size(294, 37);
+            this.vbSteering.Size = new System.Drawing.Size(261, 30);
             this.vbSteering.TabIndex = 31;
             this.vbSteering.Value = 0;
             // 
             // lbCrankDirection
             // 
             this.lbCrankDirection.AutoSize = true;
-            this.lbCrankDirection.Location = new System.Drawing.Point(14, 272);
+            this.lbCrankDirection.Location = new System.Drawing.Point(12, 218);
             this.lbCrankDirection.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbCrankDirection.Name = "lbCrankDirection";
-            this.lbCrankDirection.Size = new System.Drawing.Size(118, 20);
+            this.lbCrankDirection.Size = new System.Drawing.Size(98, 16);
             this.lbCrankDirection.TabIndex = 30;
             this.lbCrankDirection.Text = "Crank Direction";
             this.lbCrankDirection.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -402,20 +402,20 @@
             // lbCrankDirectionValue
             // 
             this.lbCrankDirectionValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lbCrankDirectionValue.Location = new System.Drawing.Point(138, 265);
+            this.lbCrankDirectionValue.Location = new System.Drawing.Point(123, 212);
             this.lbCrankDirectionValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbCrankDirectionValue.Name = "lbCrankDirectionValue";
-            this.lbCrankDirectionValue.Size = new System.Drawing.Size(179, 36);
+            this.lbCrankDirectionValue.Size = new System.Drawing.Size(159, 29);
             this.lbCrankDirectionValue.TabIndex = 29;
             this.lbCrankDirectionValue.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lbCrankSpeed
             // 
             this.lbCrankSpeed.AutoSize = true;
-            this.lbCrankSpeed.Location = new System.Drawing.Point(30, 229);
+            this.lbCrankSpeed.Location = new System.Drawing.Point(27, 183);
             this.lbCrankSpeed.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbCrankSpeed.Name = "lbCrankSpeed";
-            this.lbCrankSpeed.Size = new System.Drawing.Size(102, 20);
+            this.lbCrankSpeed.Size = new System.Drawing.Size(86, 16);
             this.lbCrankSpeed.TabIndex = 28;
             this.lbCrankSpeed.Text = "Crank Speed";
             this.lbCrankSpeed.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -423,90 +423,90 @@
             // lbHeartRateValue
             // 
             this.lbHeartRateValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lbHeartRateValue.Location = new System.Drawing.Point(420, 175);
+            this.lbHeartRateValue.Location = new System.Drawing.Point(373, 140);
             this.lbHeartRateValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbHeartRateValue.Name = "lbHeartRateValue";
-            this.lbHeartRateValue.Size = new System.Drawing.Size(89, 36);
+            this.lbHeartRateValue.Size = new System.Drawing.Size(79, 29);
             this.lbHeartRateValue.TabIndex = 26;
             this.lbHeartRateValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lbHeartRate
             // 
             this.lbHeartRate.AutoSize = true;
-            this.lbHeartRate.Location = new System.Drawing.Point(326, 185);
+            this.lbHeartRate.Location = new System.Drawing.Point(290, 148);
             this.lbHeartRate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbHeartRate.Name = "lbHeartRate";
-            this.lbHeartRate.Size = new System.Drawing.Size(88, 20);
+            this.lbHeartRate.Size = new System.Drawing.Size(72, 16);
             this.lbHeartRate.TabIndex = 25;
             this.lbHeartRate.Text = "Heart Rate";
             // 
             // lbCrankSpeedValue
             // 
             this.lbCrankSpeedValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lbCrankSpeedValue.Location = new System.Drawing.Point(138, 220);
+            this.lbCrankSpeedValue.Location = new System.Drawing.Point(123, 176);
             this.lbCrankSpeedValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbCrankSpeedValue.Name = "lbCrankSpeedValue";
-            this.lbCrankSpeedValue.Size = new System.Drawing.Size(179, 36);
+            this.lbCrankSpeedValue.Size = new System.Drawing.Size(159, 29);
             this.lbCrankSpeedValue.TabIndex = 23;
             this.lbCrankSpeedValue.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lbRightBrakeValue
             // 
             this.lbRightBrakeValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lbRightBrakeValue.Location = new System.Drawing.Point(444, 128);
+            this.lbRightBrakeValue.Location = new System.Drawing.Point(395, 102);
             this.lbRightBrakeValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbRightBrakeValue.Name = "lbRightBrakeValue";
-            this.lbRightBrakeValue.Size = new System.Drawing.Size(65, 36);
+            this.lbRightBrakeValue.Size = new System.Drawing.Size(58, 29);
             this.lbRightBrakeValue.TabIndex = 19;
             this.lbRightBrakeValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lbLeftBrakeValue
             // 
             this.lbLeftBrakeValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lbLeftBrakeValue.Location = new System.Drawing.Point(444, 82);
+            this.lbLeftBrakeValue.Location = new System.Drawing.Point(395, 66);
             this.lbLeftBrakeValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbLeftBrakeValue.Name = "lbLeftBrakeValue";
-            this.lbLeftBrakeValue.Size = new System.Drawing.Size(65, 36);
+            this.lbLeftBrakeValue.Size = new System.Drawing.Size(58, 29);
             this.lbLeftBrakeValue.TabIndex = 18;
             this.lbLeftBrakeValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lbSteeringValue
             // 
             this.lbSteeringValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lbSteeringValue.Location = new System.Drawing.Point(444, 37);
+            this.lbSteeringValue.Location = new System.Drawing.Point(395, 30);
             this.lbSteeringValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbSteeringValue.Name = "lbSteeringValue";
-            this.lbSteeringValue.Size = new System.Drawing.Size(65, 36);
+            this.lbSteeringValue.Size = new System.Drawing.Size(58, 29);
             this.lbSteeringValue.TabIndex = 17;
             this.lbSteeringValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lbFlywheelSpeedValue
             // 
             this.lbFlywheelSpeedValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lbFlywheelSpeedValue.Location = new System.Drawing.Point(138, 309);
+            this.lbFlywheelSpeedValue.Location = new System.Drawing.Point(123, 247);
             this.lbFlywheelSpeedValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbFlywheelSpeedValue.Name = "lbFlywheelSpeedValue";
-            this.lbFlywheelSpeedValue.Size = new System.Drawing.Size(179, 36);
+            this.lbFlywheelSpeedValue.Size = new System.Drawing.Size(159, 29);
             this.lbFlywheelSpeedValue.TabIndex = 14;
             this.lbFlywheelSpeedValue.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lbCrankPositionValue
             // 
             this.lbCrankPositionValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lbCrankPositionValue.Location = new System.Drawing.Point(138, 175);
+            this.lbCrankPositionValue.Location = new System.Drawing.Point(123, 140);
             this.lbCrankPositionValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbCrankPositionValue.Name = "lbCrankPositionValue";
-            this.lbCrankPositionValue.Size = new System.Drawing.Size(179, 36);
+            this.lbCrankPositionValue.Size = new System.Drawing.Size(159, 29);
             this.lbCrankPositionValue.TabIndex = 13;
             this.lbCrankPositionValue.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lbButtons
             // 
             this.lbButtons.AutoSize = true;
-            this.lbButtons.Location = new System.Drawing.Point(66, 358);
+            this.lbButtons.Location = new System.Drawing.Point(59, 286);
             this.lbButtons.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbButtons.Name = "lbButtons";
-            this.lbButtons.Size = new System.Drawing.Size(65, 20);
+            this.lbButtons.Size = new System.Drawing.Size(51, 16);
             this.lbButtons.TabIndex = 12;
             this.lbButtons.Text = "Buttons";
             this.lbButtons.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -514,10 +514,10 @@
             // lbFlywheel
             // 
             this.lbFlywheel.AutoSize = true;
-            this.lbFlywheel.Location = new System.Drawing.Point(10, 317);
+            this.lbFlywheel.Location = new System.Drawing.Point(9, 254);
             this.lbFlywheel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbFlywheel.Name = "lbFlywheel";
-            this.lbFlywheel.Size = new System.Drawing.Size(121, 20);
+            this.lbFlywheel.Size = new System.Drawing.Size(104, 16);
             this.lbFlywheel.TabIndex = 11;
             this.lbFlywheel.Text = "Flywheel Speed";
             this.lbFlywheel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -525,10 +525,10 @@
             // lbCrankPos
             // 
             this.lbCrankPos.AutoSize = true;
-            this.lbCrankPos.Location = new System.Drawing.Point(21, 183);
+            this.lbCrankPos.Location = new System.Drawing.Point(19, 146);
             this.lbCrankPos.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbCrankPos.Name = "lbCrankPos";
-            this.lbCrankPos.Size = new System.Drawing.Size(111, 20);
+            this.lbCrankPos.Size = new System.Drawing.Size(93, 16);
             this.lbCrankPos.TabIndex = 9;
             this.lbCrankPos.Text = "Crank Position";
             this.lbCrankPos.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -536,10 +536,10 @@
             // lbRightBrake
             // 
             this.lbRightBrake.AutoSize = true;
-            this.lbRightBrake.Location = new System.Drawing.Point(34, 134);
+            this.lbRightBrake.Location = new System.Drawing.Point(30, 107);
             this.lbRightBrake.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbRightBrake.Name = "lbRightBrake";
-            this.lbRightBrake.Size = new System.Drawing.Size(93, 20);
+            this.lbRightBrake.Size = new System.Drawing.Size(77, 16);
             this.lbRightBrake.TabIndex = 7;
             this.lbRightBrake.Text = "Right Brake";
             this.lbRightBrake.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -547,10 +547,10 @@
             // lbLeftBrake
             // 
             this.lbLeftBrake.AutoSize = true;
-            this.lbLeftBrake.Location = new System.Drawing.Point(45, 91);
+            this.lbLeftBrake.Location = new System.Drawing.Point(40, 73);
             this.lbLeftBrake.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbLeftBrake.Name = "lbLeftBrake";
-            this.lbLeftBrake.Size = new System.Drawing.Size(83, 20);
+            this.lbLeftBrake.Size = new System.Drawing.Size(67, 16);
             this.lbLeftBrake.TabIndex = 6;
             this.lbLeftBrake.Text = "Left Brake";
             this.lbLeftBrake.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -558,10 +558,10 @@
             // lbSteering
             // 
             this.lbSteering.AutoSize = true;
-            this.lbSteering.Location = new System.Drawing.Point(60, 45);
+            this.lbSteering.Location = new System.Drawing.Point(53, 36);
             this.lbSteering.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbSteering.Name = "lbSteering";
-            this.lbSteering.Size = new System.Drawing.Size(69, 20);
+            this.lbSteering.Size = new System.Drawing.Size(57, 16);
             this.lbSteering.TabIndex = 5;
             this.lbSteering.Text = "Steering";
             this.lbSteering.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -582,25 +582,25 @@
             "Green",
             "Blue",
             "Seat"});
-            this.clbButtons.Location = new System.Drawing.Point(138, 355);
-            this.clbButtons.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.clbButtons.Location = new System.Drawing.Point(123, 284);
+            this.clbButtons.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.clbButtons.Name = "clbButtons";
-            this.clbButtons.Size = new System.Drawing.Size(178, 303);
+            this.clbButtons.Size = new System.Drawing.Size(159, 242);
             this.clbButtons.TabIndex = 4;
             this.clbButtons.TabStop = false;
             // 
             // Details
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.gbOutput);
             this.Controls.Add(this.gbInput);
             this.DoubleBuffered = true;
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.MaximumSize = new System.Drawing.Size(746, 665);
-            this.MinimumSize = new System.Drawing.Size(746, 665);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.MaximumSize = new System.Drawing.Size(663, 532);
+            this.MinimumSize = new System.Drawing.Size(663, 532);
             this.Name = "Details";
-            this.Size = new System.Drawing.Size(746, 665);
+            this.Size = new System.Drawing.Size(663, 532);
             this.gbOutput.ResumeLayout(false);
             this.gbOutput.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbResistance)).EndInit();

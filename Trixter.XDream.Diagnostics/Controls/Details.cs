@@ -74,6 +74,18 @@ namespace Trixter.XDream.Diagnostics.Controls
 
         public void UpdateDetails()
         {
+            // Adjust brake value from [MinBrake, MaxBrake] to [100, 0] for the value bar
+            int AdjustBrake(int input)
+            {
+                const int brakeRange = API.Constants.MaxBrake - API.Constants.MinBrake;
+                const double scale = 100.0 / brakeRange;
+
+                // Subtract min value to change range from [MinBrake, MaxBrake] to [0, MaxBrake - MinBrake]
+                var newValue = brakeRange - input + API.Constants.MinBrake;
+
+                return (int)(Math.Max(0, Math.Min(newValue, brakeRange)) * scale+0.5);
+            }
+
             if (DateTimeOffset.UtcNow.Subtract(this.lastUpdate).TotalMilliseconds < this.updateInterval)
                 return;
 
@@ -93,9 +105,10 @@ namespace Trixter.XDream.Diagnostics.Controls
             this.vbActualResistance.Value = xdm.Resistance;
             this.vbSteering.Value = message.Steering;
             this.lbSteeringValue.Text = message.Steering.ToString();
-            this.vbLeftBrake.Value = message.LeftBrake;
+            
+            this.vbLeftBrake.Value = AdjustBrake(message.LeftBrake);
             this.lbLeftBrakeValue.Text = message.LeftBrake.ToString();
-            this.vbRightBrake.Value = message.RightBrake;
+            this.vbRightBrake.Value = AdjustBrake(message.RightBrake);
             this.lbRightBrakeValue.Text = message.RightBrake.ToString();
             this.lbCrankPositionValue.Text = message.CrankPosition.ToString();
             this.lbCrankTimeValue.Text = message.Crank.ToString();
