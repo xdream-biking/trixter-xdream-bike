@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using Trixter.XDream.API.Crank;
 using Trixter.XDream.API.StateMonitoring;
 
 namespace Trixter.XDream.API.Testing.StateMonitoring
@@ -10,6 +11,8 @@ namespace Trixter.XDream.API.Testing.StateMonitoring
     [TestFixture]
     public class StateMonitorTests
     {
+        private static readonly ICrankSpecification crankSpec = XDreamCrankSpecification.Default;
+
         /// <summary>
         /// All individual <see cref="XDreamStateChanges"/> values.
         /// </summary>
@@ -82,7 +85,7 @@ namespace Trixter.XDream.API.Testing.StateMonitoring
         }
 
         private static void ChangeCrankPosition(XDreamStateBuilder state)
-            => state.CrankPosition = CrankPositions.Add(state.CrankPosition, 1);
+            => state.CrankPosition = crankSpec.Advance(state.CrankPosition, 1);
 
 
         private static void ChangeHeartRate(XDreamStateBuilder state)

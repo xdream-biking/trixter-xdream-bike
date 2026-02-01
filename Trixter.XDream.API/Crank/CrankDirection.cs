@@ -1,4 +1,4 @@
-﻿namespace Trixter.XDream.API
+﻿namespace Trixter.XDream.API.Crank
 {
     public enum CrankDirection
     {

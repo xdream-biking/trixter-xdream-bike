@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using System;
+using Trixter.XDream.API.Crank;
 using Trixter.XDream.API.Generators;
 
 namespace Trixter.XDream.API.Testing.Generators
@@ -7,6 +8,8 @@ namespace Trixter.XDream.API.Testing.Generators
     [TestFixture]
     public class AutoCrankerTests
     {
+        private static readonly ICrankSpecification crankSpec = XDreamCrankSpecification.Default;
+
         [Test]
         [TestCase(60,65)]
         [TestCase(1,20)]
@@ -18,7 +21,7 @@ namespace Trixter.XDream.API.Testing.Generators
             DateTimeOffset t = DateTimeOffset.UtcNow;
             int? changedEventDelta = null;
             int referencePosition = c.CrankPosition;
-            double millisecondsPerPosition = (double)Constants.MillisecondsPerMinute / (CrankPositions.Positions * rpm1);
+            double millisecondsPerPosition = (double)Constants.MillisecondsPerMinute / (crankSpec.Positions * rpm1);
 
             void assertNotFired() { Assert.That(changedEventDelta, Is.Null, nameof(ICadenceProvider.CrankPositionChanged) + " event should not have fired."); };
             void assertFired(int delta) 
@@ -47,7 +50,7 @@ namespace Trixter.XDream.API.Testing.Generators
             assertNotFired();
 
             // Test a full crank revolutiuon
-            c.Update(t = t.AddMilliseconds(CrankPositions.Positions*millisecondsPerPosition));
+            c.Update(t = t.AddMilliseconds(crankSpec.Positions*millisecondsPerPosition));
             Assert.That(c.RPM, Is.EqualTo(0));
             Assert.That(c.CrankPosition, Is.EqualTo(referencePosition));
             assertNotFired();
@@ -59,7 +62,7 @@ namespace Trixter.XDream.API.Testing.Generators
             assertNotFired();
                         
             // Perform a full revolution
-            c.Update(t = t.AddMilliseconds(CrankPositions.Positions * millisecondsPerPosition));
+            c.Update(t = t.AddMilliseconds(crankSpec.Positions * millisecondsPerPosition));
             Assert.That(c.RPM, Is.EqualTo(rpm1));
             Assert.That(c.CrankPosition, Is.EqualTo(referencePosition));
             assertFired(60);
@@ -91,7 +94,7 @@ namespace Trixter.XDream.API.Testing.Generators
             // Change the RPM
             c.RPM = rpm2;
             Assert.That(c.RPM, Is.EqualTo(rpm2));
-            millisecondsPerPosition = (double)Constants.MillisecondsPerMinute / (CrankPositions.Positions * rpm2);
+            millisecondsPerPosition = (double)Constants.MillisecondsPerMinute / (crankSpec.Positions * rpm2);
             Assert.That(c.MillisecondsPerPosition, Is.EqualTo(millisecondsPerPosition));
 
             // Perform a single position movement
@@ -115,10 +118,10 @@ namespace Trixter.XDream.API.Testing.Generators
         {
             ICadenceProvider c = new AutoCranker();
 
-            Assert.Throws<ArgumentOutOfRangeException>(() => { c.CrankPosition = CrankPositions.MinCrankPosition - 1; });
-            Assert.Throws<ArgumentOutOfRangeException>(() => { c.CrankPosition = CrankPositions.MaxCrankPosition + 1; });
-            Assert.DoesNotThrow(() => { c.CrankPosition = CrankPositions.MaxCrankPosition; });
-            Assert.DoesNotThrow(() => { c.CrankPosition = CrankPositions.MinCrankPosition; });
+            Assert.Throws<ArgumentOutOfRangeException>(() => { c.CrankPosition = crankSpec.MinCrankPosition - 1; });
+            Assert.Throws<ArgumentOutOfRangeException>(() => { c.CrankPosition = crankSpec.MaxCrankPosition + 1; });
+            Assert.DoesNotThrow(() => { c.CrankPosition = crankSpec.MaxCrankPosition; });
+            Assert.DoesNotThrow(() => { c.CrankPosition = crankSpec.MinCrankPosition; });
             Assert.Throws<ArgumentOutOfRangeException>(() => c.RPM = -1);
             Assert.Throws<ArgumentOutOfRangeException>(() => c.RPM = AutoCranker.MaxRPM + 1);
             Assert.DoesNotThrow(() => c.RPM = 0);

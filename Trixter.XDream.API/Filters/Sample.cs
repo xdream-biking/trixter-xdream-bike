@@ -52,6 +52,7 @@ namespace Trixter.XDream.API.Filters
             }
         }
 
+        public long V { get; }
 
         public Sample(double t, double v, double? dv)
         {
@@ -59,6 +60,12 @@ namespace Trixter.XDream.API.Filters
             this.Delta = dv;
 
             this.T = t;
+        }
+
+        public Sample(long v, bool isActive)
+        {
+            V = v;
+            IsActive = isActive;
         }
     }
 

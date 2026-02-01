@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.gbOutput = new System.Windows.Forms.GroupBox();
             this.lbAppliedResistance = new System.Windows.Forms.Label();
+            this.vbActualResistance = new Trixter.XDream.Diagnostics.Controls.ValueBar();
             this.cbApplyBrakes = new System.Windows.Forms.CheckBox();
             this.lbResistance = new System.Windows.Forms.Label();
             this.tbResistance = new System.Windows.Forms.TrackBar();
@@ -49,6 +49,9 @@
             this.lbCrankRevsValue = new System.Windows.Forms.Label();
             this.lbFlywheelRevs = new System.Windows.Forms.Label();
             this.lbFlywheelRevsValue = new System.Windows.Forms.Label();
+            this.vbRightBrake = new Trixter.XDream.Diagnostics.Controls.ValueBar();
+            this.vbLeftBrake = new Trixter.XDream.Diagnostics.Controls.ValueBar();
+            this.vbSteering = new Trixter.XDream.Diagnostics.Controls.ValueBar();
             this.lbCrankDirection = new System.Windows.Forms.Label();
             this.lbCrankDirectionValue = new System.Windows.Forms.Label();
             this.lbCrankSpeed = new System.Windows.Forms.Label();
@@ -67,11 +70,6 @@
             this.lbLeftBrake = new System.Windows.Forms.Label();
             this.lbSteering = new System.Windows.Forms.Label();
             this.clbButtons = new System.Windows.Forms.CheckedListBox();
-            this.toolTips = new System.Windows.Forms.ToolTip(this.components);
-            this.vbActualResistance = new Trixter.XDream.Diagnostics.Controls.ValueBar();
-            this.vbRightBrake = new Trixter.XDream.Diagnostics.Controls.ValueBar();
-            this.vbLeftBrake = new Trixter.XDream.Diagnostics.Controls.ValueBar();
-            this.vbSteering = new Trixter.XDream.Diagnostics.Controls.ValueBar();
             this.gbOutput.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbResistance)).BeginInit();
             this.gbInput.SuspendLayout();
@@ -103,6 +101,21 @@
             this.lbAppliedResistance.TabIndex = 4;
             this.lbAppliedResistance.Text = "Applied Resistance";
             this.lbAppliedResistance.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // vbActualResistance
+            // 
+            this.vbActualResistance.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.vbActualResistance.ClipOutOfRangeValues = true;
+            this.vbActualResistance.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.vbActualResistance.Location = new System.Drawing.Point(124, 149);
+            this.vbActualResistance.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.vbActualResistance.Maximum = 250;
+            this.vbActualResistance.Name = "vbActualResistance";
+            this.vbActualResistance.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.vbActualResistance.Size = new System.Drawing.Size(34, 489);
+            this.vbActualResistance.TabIndex = 3;
+            this.vbActualResistance.Text = "valueBar1";
+            this.vbActualResistance.Value = 0;
             // 
             // cbApplyBrakes
             // 
@@ -185,7 +198,7 @@
             // lbTotalEnergy
             // 
             this.lbTotalEnergy.AutoSize = true;
-            this.lbTotalEnergy.Location = new System.Drawing.Point(410, 443);
+            this.lbTotalEnergy.Location = new System.Drawing.Point(409, 443);
             this.lbTotalEnergy.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbTotalEnergy.Name = "lbTotalEnergy";
             this.lbTotalEnergy.Size = new System.Drawing.Size(98, 20);
@@ -202,7 +215,6 @@
             this.lbTotalEnergyValue.Size = new System.Drawing.Size(113, 36);
             this.lbTotalEnergyValue.TabIndex = 47;
             this.lbTotalEnergyValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.toolTips.SetToolTip(this.lbTotalEnergyValue, "This value is calculated from the power estimate.");
             // 
             // pnRawData
             // 
@@ -274,12 +286,12 @@
             // lbPower
             // 
             this.lbPower.AutoSize = true;
-            this.lbPower.Location = new System.Drawing.Point(390, 375);
+            this.lbPower.Location = new System.Drawing.Point(454, 374);
             this.lbPower.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbPower.Name = "lbPower";
-            this.lbPower.Size = new System.Drawing.Size(120, 20);
+            this.lbPower.Size = new System.Drawing.Size(53, 20);
             this.lbPower.TabIndex = 40;
-            this.lbPower.Text = "Power Estimate";
+            this.lbPower.Text = "Power";
             this.lbPower.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lbPowerValue
@@ -291,9 +303,6 @@
             this.lbPowerValue.Size = new System.Drawing.Size(113, 36);
             this.lbPowerValue.TabIndex = 39;
             this.lbPowerValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.toolTips.SetToolTip(this.lbPowerValue, "This power value is an estimate from a table, which is configured for very specif" +
-        "ic solenoid positioning and performance, almost certainly different from the dev" +
-        "ice feeding this utility.");
             // 
             // lbCrankRevs
             // 
@@ -336,6 +345,48 @@
             this.lbFlywheelRevsValue.Size = new System.Drawing.Size(113, 36);
             this.lbFlywheelRevsValue.TabIndex = 34;
             this.lbFlywheelRevsValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // vbRightBrake
+            // 
+            this.vbRightBrake.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.vbRightBrake.ClipOutOfRangeValues = true;
+            this.vbRightBrake.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.vbRightBrake.Location = new System.Drawing.Point(138, 128);
+            this.vbRightBrake.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.vbRightBrake.Maximum = 250;
+            this.vbRightBrake.Name = "vbRightBrake";
+            this.vbRightBrake.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.vbRightBrake.Size = new System.Drawing.Size(294, 37);
+            this.vbRightBrake.TabIndex = 33;
+            this.vbRightBrake.Value = 0;
+            // 
+            // vbLeftBrake
+            // 
+            this.vbLeftBrake.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.vbLeftBrake.ClipOutOfRangeValues = true;
+            this.vbLeftBrake.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.vbLeftBrake.Location = new System.Drawing.Point(138, 82);
+            this.vbLeftBrake.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.vbLeftBrake.Maximum = 250;
+            this.vbLeftBrake.Name = "vbLeftBrake";
+            this.vbLeftBrake.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.vbLeftBrake.Size = new System.Drawing.Size(294, 37);
+            this.vbLeftBrake.TabIndex = 32;
+            this.vbLeftBrake.Value = 0;
+            // 
+            // vbSteering
+            // 
+            this.vbSteering.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.vbSteering.ClipOutOfRangeValues = true;
+            this.vbSteering.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.vbSteering.Location = new System.Drawing.Point(138, 37);
+            this.vbSteering.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.vbSteering.Maximum = 255;
+            this.vbSteering.Name = "vbSteering";
+            this.vbSteering.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.vbSteering.Size = new System.Drawing.Size(294, 37);
+            this.vbSteering.TabIndex = 31;
+            this.vbSteering.Value = 0;
             // 
             // lbCrankDirection
             // 
@@ -518,7 +569,6 @@
             // clbButtons
             // 
             this.clbButtons.FormattingEnabled = true;
-            this.clbButtons.IntegralHeight = false;
             this.clbButtons.Items.AddRange(new object[] {
             "Front Gear Up",
             "Front Gear Down",
@@ -535,68 +585,9 @@
             this.clbButtons.Location = new System.Drawing.Point(138, 355);
             this.clbButtons.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.clbButtons.Name = "clbButtons";
-            this.clbButtons.Size = new System.Drawing.Size(178, 283);
+            this.clbButtons.Size = new System.Drawing.Size(178, 303);
             this.clbButtons.TabIndex = 4;
             this.clbButtons.TabStop = false;
-            // 
-            // vbActualResistance
-            // 
-            this.vbActualResistance.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.vbActualResistance.ClipOutOfRangeValues = true;
-            this.vbActualResistance.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.vbActualResistance.Location = new System.Drawing.Point(124, 149);
-            this.vbActualResistance.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.vbActualResistance.Maximum = 250;
-            this.vbActualResistance.Name = "vbActualResistance";
-            this.vbActualResistance.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.vbActualResistance.Size = new System.Drawing.Size(34, 489);
-            this.vbActualResistance.TabIndex = 3;
-            this.vbActualResistance.Text = "valueBar1";
-            this.vbActualResistance.Value = 0;
-            // 
-            // vbRightBrake
-            // 
-            this.vbRightBrake.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.vbRightBrake.ClipOutOfRangeValues = true;
-            this.vbRightBrake.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.vbRightBrake.Location = new System.Drawing.Point(138, 128);
-            this.vbRightBrake.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.vbRightBrake.Maximum = 250;
-            this.vbRightBrake.Name = "vbRightBrake";
-            this.vbRightBrake.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            this.vbRightBrake.Size = new System.Drawing.Size(294, 37);
-            this.vbRightBrake.TabIndex = 33;
-            this.vbRightBrake.Text = "This value is expected to go no lower than around 135.";
-            this.vbRightBrake.Value = 0;
-            // 
-            // vbLeftBrake
-            // 
-            this.vbLeftBrake.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.vbLeftBrake.ClipOutOfRangeValues = true;
-            this.vbLeftBrake.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.vbLeftBrake.Location = new System.Drawing.Point(138, 82);
-            this.vbLeftBrake.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.vbLeftBrake.Maximum = 250;
-            this.vbLeftBrake.Name = "vbLeftBrake";
-            this.vbLeftBrake.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            this.vbLeftBrake.Size = new System.Drawing.Size(294, 37);
-            this.vbLeftBrake.TabIndex = 32;
-            this.vbLeftBrake.Text = "This value is expected to go no lower than around 135.";
-            this.vbLeftBrake.Value = 0;
-            // 
-            // vbSteering
-            // 
-            this.vbSteering.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.vbSteering.ClipOutOfRangeValues = true;
-            this.vbSteering.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.vbSteering.Location = new System.Drawing.Point(138, 37);
-            this.vbSteering.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.vbSteering.Maximum = 255;
-            this.vbSteering.Name = "vbSteering";
-            this.vbSteering.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            this.vbSteering.Size = new System.Drawing.Size(294, 37);
-            this.vbSteering.TabIndex = 31;
-            this.vbSteering.Value = 0;
             // 
             // Details
             // 
@@ -665,6 +656,5 @@
         private System.Windows.Forms.Label lbLeftBrake;
         private System.Windows.Forms.Label lbSteering;
         private System.Windows.Forms.CheckedListBox clbButtons;
-        private System.Windows.Forms.ToolTip toolTips;
     }
 }

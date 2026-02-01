@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Trixter.XDream.API.Communications;
+using Trixter.XDream.API.Crank;
 using Trixter.XDream.API.Meters;
 
 namespace Trixter.XDream.API.Testing.Experimental
@@ -10,6 +11,8 @@ namespace Trixter.XDream.API.Testing.Experimental
     [TestFixture]
     public class CrankMeterExperiments
     {
+        private static readonly ICrankSpecification crankSpec = XDreamCrankSpecification.Default;
+
         [Explicit]
         [Test]
         public void BackAndForwardWithRealData()
@@ -44,7 +47,7 @@ namespace Trixter.XDream.API.Testing.Experimental
 
             HashSet<int>[] rpms = Enumerable.Range(0, 1000).Select(i => new HashSet<int>()).ToArray(); // If we get a calculated 1000RPM, something is unnatural
 
-            ICrankMeter cs = new PositionalCrankMeter();
+            ICrankMeter cs = new PositionalCrankMeter(crankSpec);
             XDreamState last = messages[0];
 
             cs.AddData(last);
@@ -74,7 +77,7 @@ namespace Trixter.XDream.API.Testing.Experimental
         {
             XDreamMessage[] messages = XDreamMessageIO.Read(Resources.flywheel_crank_messages);
 
-            StatisticsGatheringCrankMeter cm = new StatisticsGatheringCrankMeter(new PositionalCrankMeter(), 500);
+            StatisticsGatheringCrankMeter cm = new StatisticsGatheringCrankMeter(new PositionalCrankMeter(crankSpec), 500);
 
             Array.ForEach(messages, cm.AddData);
 

@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using Trixter.XDream.API.Crank;
 
 namespace Trixter.XDream.API.Testing.Meters
 {
@@ -17,10 +18,9 @@ namespace Trixter.XDream.API.Testing.Meters
         [TestCase(60, 2, 2)]
         [TestCase(60, 120, 60)]
         [TestCase(60, 121, 1)]
-
-        public void TestAdd(int position, int delta, int expected)
+        public void TestAdvance(int position, int delta, int expected)
         {
-            int actual = CrankPositions.Add(position, delta);
+            int actual = XDreamCrankSpecification.Default.Advance(position, delta);
             Assert.That(actual, Is.EqualTo(expected));
         }
     }

@@ -1,4 +1,5 @@
 ﻿using System;
+using Trixter.XDream.API.Crank;
 
 namespace Trixter.XDream.API
 {
@@ -9,13 +10,14 @@ namespace Trixter.XDream.API
     public class XDreamStateBuilder : XDreamState
     {
         private int crank = 0;
-        private int crankPosition = CrankPositions.MinCrankPosition;
+        private int crankPosition;
         private int flywheel = Constants.MaxFlywheelReading;
         private int heartRate = 0;
         private int leftBrake = Constants.MaxBrake;
         private int rightBrake = Constants.MaxBrake;
         private int steering = Constants.MidSteering;
         private DateTimeOffset timeStamp;
+        private ICrankSpecification crankSpecification = XDreamCrankSpecification.Default;
         
         private bool HasButton(XDreamControllerButtons which) => (this.Buttons & which) == which;
         private void SetButton(XDreamControllerButtons which, bool value)
@@ -31,6 +33,14 @@ namespace Trixter.XDream.API
             if (value < min || value > max)
                 throw new ArgumentOutOfRangeException(nameof(value));
         }
+
+        public XDreamStateBuilder()
+        {
+            this.Buttons = XDreamControllerButtons.None;
+            this.CrankPosition = this.crankSpecification.MinCrankPosition;
+            this.TimeStamp = DateTimeOffset.UtcNow;
+        }
+
 
         public bool FrontGearUp
         {
@@ -100,7 +110,7 @@ namespace Trixter.XDream.API
             get => crank;
             set
             {
-                if (!CrankPositions.IsValidCrankTimeReading(value))
+                if (!this.crankSpecification.IsValidRawDataReading(value))
                     throw new ArgumentOutOfRangeException(nameof(value));
                 crank = value;
             }
@@ -111,7 +121,7 @@ namespace Trixter.XDream.API
             get => crankPosition;
             set
             {
-                if (!CrankPositions.IsValidCrankPosition(value))
+                if (!this.crankSpecification.IsValidCrankPosition(value))
                     throw new ArgumentOutOfRangeException(nameof(value));
                 crankPosition = value;
             }

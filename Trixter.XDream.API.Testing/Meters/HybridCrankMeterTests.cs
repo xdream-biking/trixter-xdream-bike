@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Trixter.XDream.API.Crank;
 using Trixter.XDream.API.Meters;
 
 namespace Trixter.XDream.API.Testing.Meters
@@ -28,7 +29,7 @@ namespace Trixter.XDream.API.Testing.Meters
         /// Generate comparison data from a <see cref="PositionalCrankMeter"/> for a <see cref="HybridCrankMeter"/>.
         /// </summary>
         [Test]
-        public void TestPositional() => TestTransition(new PositionalCrankMeter(1100),4, rpmConverter);
+        public void TestPositional() => TestTransition(new PositionalCrankMeter(XDreamCrankSpecification.Default, 1100),4, rpmConverter);
 
 
         private void TestTransition(ICrankMeter cc, int tolerance, Func<int,int> rpmToRaw)

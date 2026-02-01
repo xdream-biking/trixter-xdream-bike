@@ -1,4 +1,5 @@
 ﻿using System;
+using Trixter.XDream.API.Crank;
 
 namespace Trixter.XDream.API.Generators
 {
@@ -18,7 +19,10 @@ namespace Trixter.XDream.API.Generators
         private DateTimeOffset lastUpdate;
         private double positionsPerMillisecond = double.PositiveInfinity;
 
+
         public event CrankPositionChangedDelegate<ICadenceProvider> CrankPositionChanged;
+
+        public ICrankSpecification CrankSpecification => new XDreamCrankSpecification();
 
         public double MillisecondsPerPosition { get; private set; }
 
@@ -27,12 +31,12 @@ namespace Trixter.XDream.API.Generators
             get => this.crankPosition;
             set
             {
-                if (!CrankPositions.IsValidCrankPosition(value))
+                if (!this.CrankSpecification.IsValidCrankPosition(value))
                     throw new ArgumentOutOfRangeException(nameof(value));
 
                 this.crankPosition = value;
                 this.lastUpdate = DateTimeOffset.MinValue;
-                this.exactCrankPosition = value - CrankPositions.MinCrankPosition;
+                this.exactCrankPosition = value - this.CrankSpecification.MinCrankPosition;
             }
         }
 
@@ -53,7 +57,7 @@ namespace Trixter.XDream.API.Generators
                 }
                 else
                 {
-                    this.MillisecondsPerPosition = (double)Constants.MillisecondsPerMinute / this.rpm / CrankPositions.Positions;
+                    this.MillisecondsPerPosition = (double)Constants.MillisecondsPerMinute / this.rpm / this.CrankSpecification.Positions;
                     this.positionsPerMillisecond = 1d / this.MillisecondsPerPosition;
                 }
             }
@@ -66,7 +70,7 @@ namespace Trixter.XDream.API.Generators
 
         public AutoCranker()
         {
-            this.CrankPosition = CrankPositions.MinCrankPosition;
+            this.CrankPosition = this.CrankSpecification.MinCrankPosition;
             this.RPM = 0;
         }
 
@@ -88,17 +92,17 @@ namespace Trixter.XDream.API.Generators
             double dP = dT * positionsPerMillisecond;
             this.exactCrankPosition += dP;
 
-            int newCrankPosition = CrankPositions.MinCrankPosition + (int)this.exactCrankPosition;
+            int newCrankPosition = this.CrankSpecification.MinCrankPosition + (int)this.exactCrankPosition;
 
             // now that the exact crank position has been used, clip it to the correct range
-            if (this.exactCrankPosition >= CrankPositions.Positions)
+            if (this.exactCrankPosition >= this.CrankSpecification.Positions)
                 this.exactCrankPosition -= Math.Truncate(this.exactCrankPosition);
 
             int delta = newCrankPosition - this.crankPosition;
 
             if (newCrankPosition != this.crankPosition)
             {
-                this.crankPosition = CrankPositions.Add(this.crankPosition, delta);
+                this.crankPosition = this.CrankSpecification.Advance(this.crankPosition, delta);
                 this.OnCrankPositionChanged(delta);
             }
         }

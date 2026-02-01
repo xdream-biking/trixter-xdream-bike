@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using System;
+using Trixter.XDream.API.Crank;
 using Trixter.XDream.API.Meters;
 
 namespace Trixter.XDream.API.Testing.Meters
@@ -7,7 +8,9 @@ namespace Trixter.XDream.API.Testing.Meters
     [TestFixture]
     public class PositionalCrankMeterTests
     {
-        /// <summary>
+        private static readonly ICrankSpecification crankSpec = XDreamCrankSpecification.Default;
+
+        /// <summary> 
         /// Test that an object of the <see cref="PositionalCrankMeter"/> class will correctly detect the expected direction and RPM between 2 samples.
         /// Assumes the direction calculated will be the direction of shortest distance between the positions.
         /// </summary>
@@ -21,7 +24,8 @@ namespace Trixter.XDream.API.Testing.Meters
         [TestCase(1, 1, CrankDirection.None)]
         public void TestDirectionAndRPM_2Samples(int position0, int position1, CrankDirection expectedDirection)
         {
-            ICrankMeter cs = new PositionalCrankMeter();
+            
+            ICrankMeter cs = new PositionalCrankMeter(crankSpec);
 
             double dt = 100d;
             DateTimeOffset t0 = DateTimeOffset.UtcNow, t1 = t0.AddMilliseconds(dt);
@@ -41,13 +45,13 @@ namespace Trixter.XDream.API.Testing.Meters
                 
                 // Now calculate the positional RPM
                 if (cs.Direction == CrankDirection.Backward)
-                    dp = CrankPositions.CrankDelta(position1, position0);
+                    dp = crankSpec.CrankDelta(position1, position0);
                 else
-                    dp = CrankPositions.CrankDelta(position0, position1);
+                    dp = crankSpec.CrankDelta(position0, position1);
 
                 double notchesPerMillisecond = dp / dt;
                 double notchesPerMinute = Constants.MillisecondsPerMinute * notchesPerMillisecond;
-                int rpm = (int)(0.5 + CrankPositions.RevolutionsPerPosition * notchesPerMinute);
+                int rpm = (int)(0.5 + crankSpec.RevolutionsPerPosition * notchesPerMinute);
 
                 Assert.That(cs.RPM, Is.EqualTo(rpm), "Expected RPM");
             }
@@ -72,9 +76,9 @@ namespace Trixter.XDream.API.Testing.Meters
         {
             Assert.That(t.Length, Is.EqualTo(positions.Length), "Position and time arrays should be the same length.");
 
-            ICrankMeter cs = new PositionalCrankMeter(smoothingIntervalMilliseconds);
+            ICrankMeter cs = new PositionalCrankMeter(crankSpec,smoothingIntervalMilliseconds);
 
-            for (int i = 0; i < CrankPositions.Positions; i++)
+            for (int i = 0; i < crankSpec.Positions; i++)
             {
                 DateTimeOffset t0 = DateTimeOffset.UtcNow;
 
@@ -82,7 +86,7 @@ namespace Trixter.XDream.API.Testing.Meters
 
                 for (int sample = 0; sample < positions.Length; sample++)
                 {
-                    int p = CrankPositions.Add(positions[sample], i);
+                    int p = crankSpec.Advance(positions[sample], i);
                     cs.AddData(t0.AddMilliseconds(t[sample]), p, 0);
                 }
 
@@ -114,8 +118,8 @@ namespace Trixter.XDream.API.Testing.Meters
         [TestCase(0, 2000,4)]
         public void TestDirectionAndRPM(int rpm,  int smoothingInterval, int tolerance)
         {
-            PositionalCrankMeter cs = new PositionalCrankMeter(smoothingInterval);
-            var expectedDirection = CrankPositions.GetDirection(rpm);
+            PositionalCrankMeter cs = new PositionalCrankMeter(crankSpec, smoothingInterval);
+            var expectedDirection = crankSpec.GetDirection(rpm);
             int directionalRpm = Math.Abs(rpm);
             XDreamState[] cadenceData = CrankMeterTests.GenerateCadenceData(rpm, 10, 2*smoothingInterval, DateTimeOffset.UtcNow, MappedCrankMeter.DefaultMappingRawToRpm, x=>65534);
 

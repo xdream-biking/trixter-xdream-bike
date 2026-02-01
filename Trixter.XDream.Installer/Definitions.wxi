@@ -5,8 +5,8 @@
   <?define UPGRADE_CODE="{4C97982C-09F9-4515-9FA5-1F2625D04BAB}"?>
 	<?define OUTPUT_CAB="XDream"?>
 	<?define PRODUCT_NAME = "Trixter X-Dream Bike Utilities $(var.VERSION)"?>
-	<?define PRODUCT_DESC = "A diagnostic utility for testing a Trixter X-Dream V1 Exercise Bike"?>
+	<?define PRODUCT_DESC = "A diagnostic utility for testing a Trixter X-Dream Exercise Bike"?>
 	<?define MANUFACTURER="David Mason"?>
-	<?define GITHUB_URL = "https://github.com/xdream-biking/trixter-XDream" ?>
+	<?define GITHUB_URL = "https://github.com/xdream-biking/trixter-xdream" ?>
 	<?define LICENSE="..\\LICENSE.rtf" ?>
 </Include>

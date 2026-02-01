@@ -18,6 +18,7 @@ namespace Trixter.XDream.TestController
         Func<int, int> invertBrakeValue = v => MaxBrake - v + MinBrake;
         const int MaxFlywheelRPM = 1000;
         DateTimeOffset lastCrankPositionInvalidated = DateTimeOffset.MinValue;
+        System.Timers.Timer updateTimer;
 
         public ControllerForm()
         {
@@ -77,18 +78,40 @@ namespace Trixter.XDream.TestController
             {
                 this.DoWithSuppressedEvents(() => this.nudCrankPosition.Value = this.controller.State.CrankPosition);
             };
+
+            this.updateTimer = new System.Timers.Timer();
+            this.updateTimer.Interval = 1000;
+            this.updateTimer.Elapsed += (s, e) =>
+            {
+                this.DoWithSuppressedEvents(() =>
+                {
+                    this.Invoke(new MethodInvoker(() =>
+                    {
+                        this.lbRequestsPerSecond.Text = this.controller.ResistanceRequestsPerSecond.ToString("N2");
+                    }));                    
+                });
+            };
+            this.updateTimer.AutoReset = true;
+
+            this.nudCrankRPM.Maximum = 300;
+            this.nudCrankRPM.Minimum = 0;
+            this.nudCrankRevTime.Maximum = 65534;
+            int crankTime = MappedCrankMeter.DefaultMappingRpmToRaw((int)this.nudCrankRPM.Maximum);
+            this.nudCrankRevTime.Minimum = crankTime;
+            
+
         }
 
         private void PopulateComPortBox()
         {
             string[] ports = SerialPort.GetPortNames().OrderBy(p => p).ToArray();
-            this.cbComPort.Items.Clear();
-            this.cbComPort.Items.AddRange(ports);
+            this.tscSerialPorts.Items.Clear();
+            this.tscSerialPorts.Items.AddRange(ports);
             string userSettings = Properties.Settings.Default.ComPort;
 
             int i = Array.IndexOf(ports, userSettings);
             if (i >= 0)
-                this.cbComPort.SelectedIndex = i;
+                this.tscSerialPorts.SelectedIndex = i;
 
         }
 
@@ -128,7 +151,11 @@ namespace Trixter.XDream.TestController
 
                 return;
             }
-            this.lbResistanceValue.Text = this.controller.Resistance.ToString();
+                        
+            var resistance = this.controller.Resistance;
+            this.lbResistanceValue.Text = resistance.ToString();
+            this.vblResistance.Value = resistance;
+
         }
 
         private void Controller_ResistanceChanged(Controller sender)
@@ -201,6 +228,8 @@ namespace Trixter.XDream.TestController
 
         private void tbCrankSpeed_ValueChanged(object sender, System.EventArgs e)
         {
+            int? flywheelUpdate = null;
+
             this.DoWithSuppressedEvents(() =>
             {
                 int rpm;
@@ -224,7 +253,17 @@ namespace Trixter.XDream.TestController
 
                 this.controller.CrankRPM = rpm;
 
+                if (this.cbConnectCrank.Checked)
+                {
+                    var expectedFlywheelSpeed = Controller.GearRatio * rpm;
+                    if (this.tbFlywheelSpeed.Value < expectedFlywheelSpeed)
+                        flywheelUpdate = expectedFlywheelSpeed;
+                }
+
             });
+
+            if (flywheelUpdate.HasValue)
+                this.tbFlywheelSpeed.Value = flywheelUpdate.Value;
         }
 
         private void Controller_CrankPositionChanged(Controller sender, int delta)
@@ -313,24 +352,28 @@ namespace Trixter.XDream.TestController
         private void bnConnect_Click(object sender, EventArgs e)
         {
 
-            this.controller.COMPort = this.cbComPort.Text;
+            this.controller.COMPort = this.tscSerialPorts.Text;
             this.controller.Connect();
             this.controller.Send();
 
-            this.bnConnect.Enabled = false;
-            this.cbComPort.Enabled = false;
-            this.bnDisconnect.Enabled = true;
-            Properties.Settings.Default.ComPort = this.cbComPort.Text;
+            this.tsbConnect.Enabled = false;
+            this.tscSerialPorts.Enabled = false;
+            this.tsbDisconnect.Enabled = true;
+            Properties.Settings.Default.ComPort = this.tscSerialPorts.Text;
             Properties.Settings.Default.Save();
+
+            this.updateTimer.Start();
 
         }
 
         private void bnDisconnect_Click(object sender, EventArgs e)
         {
             this.controller.Disconnect();
-            this.bnConnect.Enabled = true;
-            this.cbComPort.Enabled = true;
-            this.bnDisconnect.Enabled = false;
+            this.tsbConnect.Enabled = true;
+            this.tscSerialPorts.Enabled = true;
+            this.tsbDisconnect.Enabled = false;
+
+            this.updateTimer.Stop();
         }
 
         private void Brake_ValueChanged(object sender, EventArgs e)

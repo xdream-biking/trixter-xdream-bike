@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using Trixter.XDream.API.Crank;
 using Trixter.XDream.API.Flywheel;
 using Trixter.XDream.API.Meters;
 
