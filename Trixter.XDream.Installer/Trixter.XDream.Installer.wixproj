@@ -7,8 +7,8 @@
     <Content Include="Version.wxi" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="WixToolset.UI.wixext" Version="6.0.0" />
-    <PackageReference Include="WixToolset.NetFx.wixext" Version="6.0.0" />
+    <PackageReference Include="WixToolset.UI.wixext" Version="6.0.2" />
+    <PackageReference Include="WixToolset.NetFx.wixext" Version="6.0.2" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Trixter.XDream.Diagnostics\Trixter.XDream.Diagnostics.csproj" />
