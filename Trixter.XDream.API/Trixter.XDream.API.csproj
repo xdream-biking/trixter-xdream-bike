@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>7.3</LangVersion>
@@ -12,8 +12,14 @@
     <Version>1.5.1</Version>
     <AssemblyVersion>$(Version)</AssemblyVersion>
     <FileVersion>$(Version)</FileVersion>
+    <Configurations>Debug;Release;Signed Release</Configurations>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="System.IO.Ports" Version="6.0.0" />
   </ItemGroup>
+
+  
+  <Target Condition="$(Configuration)=='Signed Release'"  Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="call ..\Scripts\sign-tool.cmd &quot;$(TargetPath)&quot; &quot;Trixter X-Dream API&quot; " />
+  </Target>
 </Project>
