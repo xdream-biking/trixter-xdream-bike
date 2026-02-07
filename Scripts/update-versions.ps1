@@ -40,21 +40,13 @@ try {
 
     Write-Host "New Version: $NewVersion"
 
-    # Regex patterns (uses .NET regex)
-    $versionNumberRegex = '\d+(?:\.\d+){2,3}'
-    $csprojProductVersionRegex = "(<Version>)$versionNumberRegex(</Version>)"
-    $csprojVersionReplacement = '${1}' + $NewVersion + '${2}'
-
-    $wixVersionRegex = '(<\?define\s+VERSION\s*=\s*")' + $versionNumberRegex + '("\s*\?>)'
-    $wixVersionReplacement = '${1}' + $NewVersion + '${2}'
-
     $txd = 'Trixter.XDream'
 
     function Replace-InFile {
         param(
             [Parameter(Mandatory=$true)][string]$Path,
-            [Parameter(Mandatory=$true)][string]$Pattern,
-            [Parameter(Mandatory=$true)][string]$Replacement
+            [Parameter(Mandatory=$true)][string]$NewVersion,
+            [Parameter(Mandatory=$true)][bool]$isCsproj
         )
 
         if (-not (Test-Path $Path)) {
@@ -63,35 +55,34 @@ try {
         }
 
         # Read/Write using UTF8 to match original script behavior
-        $content = Get-Content -Path $Path -Raw -Encoding UTF8
-        $newContent = [regex]::Replace($content, $Pattern, $Replacement)
-
-        if ($newContent -ne $content) {
-            Set-Content -Path $Path -Value $newContent -Encoding UTF8
-            Write-Host "Updated: $Path"
+        [xml]$content = Get-Content -Path $Path -Raw -Encoding UTF8
+                
+        if ($isCsProj) {
+            $content.Project.PropertyGroup.Version = $NewVersion
+        } else {
+            $content.Include.define = 'VERSION = "'+$NewVersion+'"'
         }
-        else {
-            Write-Host "No matching pattern found in: $Path"
-        }
+        $content.Save($Path)
+        Write-Host "Updated: $Path"        
 
         return $true
     }
 
     Write-Host 'Updating API'
     $apiProj = Join-Path $PSScriptRoot "..\$txd.API\$txd.API.csproj"
-    if (-not (Replace-InFile -Path $apiProj -Pattern $csprojProductVersionRegex -Replacement $csprojVersionReplacement)) { exit 1 }
+    Replace-InFile -Path $apiProj -NewVersion $NewVersion -isCsproj $true
 
     Write-Host 'Updating Diagnostics'
     $diagProj = Join-Path $PSScriptRoot "..\$txd.Diagnostics\$txd.Diagnostics.csproj"
-    if (-not (Replace-InFile -Path $diagProj -Pattern $csprojProductVersionRegex -Replacement $csprojVersionReplacement)) { exit 1 }
+    Replace-InFile -Path $diagProj -NewVersion $NewVersion -isCsproj $true 
 
     Write-Host 'Updating Test Controller'
     $tcProj = Join-Path $PSScriptRoot "..\$txd.TestController\$txd.TestController.csproj"
-    if (-not (Replace-InFile -Path $tcProj -Pattern $csprojProductVersionRegex -Replacement $csprojVersionReplacement)) { exit 1 }
+    Replace-InFile -Path $tcProj -NewVersion $NewVersion -isCsproj $true
 
     Write-Host 'Updating installer project'
     $wxi = Join-Path $PSScriptRoot "..\$txd.Installer\Version.wxi"
-    if (-not (Replace-InFile -Path $wxi -Pattern $wixVersionRegex -Replacement $wixVersionReplacement)) { exit 1 }
+    Replace-InFile -Path $wxi -NewVersion $NewVersion -isCsproj $false
 
     Write-Host 'Done.'
     exit 0
