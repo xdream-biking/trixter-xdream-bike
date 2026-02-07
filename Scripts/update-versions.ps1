@@ -1,90 +1,102 @@
-@echo off
-setlocal
-set return=goto :eof
-set checkError=if errorlevel 1 goto :error
+<#
+.SYNOPSIS
+    Update project and installer version numbers from version.txt.
 
-cd /d "%~dp0"
+.DESCRIPTION
+    Replaces product/version fields in .csproj files and the VERSION define in the installer
+    Version.wxi. Intended to run from the repository Scripts folder (the script sets location
+    to its own folder automatically). 
 
-echo Getting the version number from version.txt
-call :getNewVersion newVersion
-%checkError%
+.USAGE
+    .\update-versions.ps1                # reads version from version.txt
+    .\update-versions.ps1 -NewVersion 1.6.0
+#>
 
-echo New Version: %newVersion%
+param(
+    [string]$NewVersion
+)
 
-set newVersionCommas=%newVersion:.=,%
+Set-StrictMode -Version Latest
 
-rem Non-optimal regexes: useful characters for OR, lookbehind and " are troublesome in batch scripting
-set versionNumberRegex=\d+(?:\.\d+){2,3}
-set assemblyVersionRegex=(Assembly(?:File)?Version(?:Attribute)?\(.)%versionNumberRegex%
-set assemblyVersionReplacement=${1}%newVersion%
+try {
+    # ensure script runs from its directory (matches batch behavior)
+    Set-Location -Path $PSScriptRoot
 
-set csprojAssemblyVersionRegex=(\u003CAssemblyVersion\u003E)%versionNumberRegex%(\u003C/AssemblyVersion\u003E)
-set csprojFileVersionRegex=(\u003CFileVersion\u003E)%versionNumberRegex%(\u003C/FileVersion\u003E)
-set csprojProductVersionRegex=(\u003CVersion\u003E)%versionNumberRegex%(\u003C/Version\u003E)
-set csprojVersionReplacement=${1}%newVersion%${2}
+    if (-not $NewVersion) {
+        $versionFile = Join-Path $PSScriptRoot 'version.txt'
+        if (-not (Test-Path $versionFile)) {
+            Write-Error "version.txt not found at $versionFile"
+            exit 1
+        }
 
-set wixVersionRegex=(.\?define\s+VERSION\s*=\s*.)%versionNumberRegex%(.\s*\?.)
-set wixVersionReplacement=${1}%newVersion%${2}
+        $raw = Get-Content -Path $versionFile -Raw -ErrorAction Stop
+        $NewVersion = $raw.Trim()
+    }
 
-set txd=Trixter.XDream
+    if ([string]::IsNullOrWhiteSpace($NewVersion)) {
+        Write-Error 'No version found or provided.'
+        exit 1
+    }
 
-echo Updating API
-call :updatecsproj "..\%txd%.API\%txd%.API.csproj"
-%checkError%
+    Write-Host "New Version: $NewVersion"
 
-echo Updating Diagnostics
-call :updatecsproj "..\%txd%.Diagnostics\%txd%.Diagnostics.csproj"
-%checkError%
+    # Regex patterns (uses .NET regex)
+    $versionNumberRegex = '\d+(?:\.\d+){2,3}'
+    $csprojProductVersionRegex = "(<Version>)$versionNumberRegex(</Version>)"
+    $csprojVersionReplacement = '${1}' + $NewVersion + '${2}'
 
-echo Updating Test Controller
-call :updatecsproj "..\%txd%.TestController\%txd%.TestController.csproj"
-%checkError%
+    $wixVersionRegex = '(<\?define\s+VERSION\s*=\s*")' + $versionNumberRegex + '("\s*\?>)'
+    $wixVersionReplacement = '${1}' + $NewVersion + '${2}'
 
-echo Updating installer project
-call :regexReplace "..\%txd%.Installer\Version.wxi" "%wixVersionRegex%" "%wixVersionReplacement%" utf8
-%checkError%
+    $txd = 'Trixter.XDream'
 
-echo Done.
+    function Replace-InFile {
+        param(
+            [Parameter(Mandatory=$true)][string]$Path,
+            [Parameter(Mandatory=$true)][string]$Pattern,
+            [Parameter(Mandatory=$true)][string]$Replacement
+        )
 
-%return%
+        if (-not (Test-Path $Path)) {
+            Write-Error "File not found: $Path"
+            return $false
+        }
 
-:updatecsproj
+        # Read/Write using UTF8 to match original script behavior
+        $content = Get-Content -Path $Path -Raw -Encoding UTF8
+        $newContent = [regex]::Replace($content, $Pattern, $Replacement)
 
-rem %1 is the file path of the .csproj file
+        if ($newContent -ne $content) {
+            Set-Content -Path $Path -Value $newContent -Encoding UTF8
+            Write-Host "Updated: $Path"
+        }
+        else {
+            Write-Host "No matching pattern found in: $Path"
+        }
 
-call :regexReplace "%~1" "%csprojAssemblyVersionRegex%" "%csprojVersionReplacement%" utf8
-%checkError%
+        return $true
+    }
 
-call :regexReplace "%~1" "%csprojFileVersionRegex%" "%csprojVersionReplacement%" utf8
-%checkError%
+    Write-Host 'Updating API'
+    $apiProj = Join-Path $PSScriptRoot "..\$txd.API\$txd.API.csproj"
+    if (-not (Replace-InFile -Path $apiProj -Pattern $csprojProductVersionRegex -Replacement $csprojVersionReplacement)) { exit 1 }
 
-call :regexReplace "%~1" "%csprojProductVersionRegex%" "%csprojVersionReplacement%" utf8
-%checkError%
+    Write-Host 'Updating Diagnostics'
+    $diagProj = Join-Path $PSScriptRoot "..\$txd.Diagnostics\$txd.Diagnostics.csproj"
+    if (-not (Replace-InFile -Path $diagProj -Pattern $csprojProductVersionRegex -Replacement $csprojVersionReplacement)) { exit 1 }
 
-%return%
+    Write-Host 'Updating Test Controller'
+    $tcProj = Join-Path $PSScriptRoot "..\$txd.TestController\$txd.TestController.csproj"
+    if (-not (Replace-InFile -Path $tcProj -Pattern $csprojProductVersionRegex -Replacement $csprojVersionReplacement)) { exit 1 }
 
-:getNewVersion
-rem sets the environment variable specified by the first argument to the last value found in the version.txt file
-for /f "tokens=*" %%f in ('type %~dp0\version.txt') do set %1=%%f
-if "%newVersion%"=="" exit /b 1
-%return%
+    Write-Host 'Updating installer project'
+    $wxi = Join-Path $PSScriptRoot "..\$txd.Installer\Version.wxi"
+    if (-not (Replace-InFile -Path $wxi -Pattern $wixVersionRegex -Replacement $wixVersionReplacement)) { exit 1 }
 
-
-:regexReplace
-rem %1 input file path
-rem %2 search pattern
-rem %3 replacement pattern
-rem %4 output encoding
-set tempFile=%temp%\bhcvbhcvlhb.tmp
-powershell (Get-Content -path "%~1" -Raw -Encoding utf8) -replace '%~2','%~3' ^| out-file "%tempFile%" -encoding %~4 -NoNewline
-if errorlevel 1 exit /b 1
-
-copy "%tempFile%" "%~1" > nul
-if errorlevel 1 exit /b 1
-
-%return%
-
-:error
-echo ERROR
-exit /b 1
-
+    Write-Host 'Done.'
+    exit 0
+}
+catch {
+    Write-Error $_.Exception.Message
+    exit 1
+}
