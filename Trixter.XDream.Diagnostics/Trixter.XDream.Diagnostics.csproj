@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net48</TargetFramework>
@@ -17,6 +17,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <PackageProjectUrl>https://github.com/xdream-biking/trixter-xdream-bike</PackageProjectUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <Configurations>Debug;Release;Signed Release</Configurations>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Resources\Refresh-16.png" />
@@ -58,4 +59,8 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+
+  <Target Condition="$(Configuration)=='Signed Release'"  Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="call ..\Scripts\sign-tool.cmd &quot;$(TargetPath)&quot; &quot;Trixter X-Dream Diagnostic Utilities&quot; " />
+  </Target>
 </Project>

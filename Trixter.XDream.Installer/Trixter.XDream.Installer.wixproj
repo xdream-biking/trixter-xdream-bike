@@ -1,6 +1,7 @@
 ﻿<Project Sdk="WixToolset.Sdk/6.0.0">
   <PropertyGroup>
     <InstallerPlatform>x86</InstallerPlatform>
+    <Configurations>Debug;Release;Signed Release</Configurations>
   </PropertyGroup>
   <ItemGroup>
     <Content Include="Definitions.wxi" />
@@ -13,4 +14,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Trixter.XDream.Diagnostics\Trixter.XDream.Diagnostics.csproj" />
   </ItemGroup>
+  <Target Condition="$(Configuration)=='Signed Release'"  Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="call ..\Scripts\sign-tool.cmd &quot;$(TargetPath)&quot; &quot;Trixter X-Dream Diagnostic Utilities&quot; " />
+  </Target>
 </Project>
