@@ -47,7 +47,7 @@ namespace Trixter.XDream.Diagnostics
             this.tpDetails = new System.Windows.Forms.TabPage();
             this.dDetailsControl = new Trixter.XDream.Diagnostics.Controls.Details();
             this.tpCrank = new System.Windows.Forms.TabPage();
-            this.tdCrankDetails = new Trixter.XDream.Diagnostics.Controls.CrankDetails();
+            this.cdCrankDetails = new Trixter.XDream.Diagnostics.Controls.CrankDetails();
             this.tpDriver = new System.Windows.Forms.TabPage();
             this.gpGroupPolicyControl = new Trixter.XDream.Diagnostics.Controls.GroupPolicy();
             this.dlgSaveFile = new System.Windows.Forms.SaveFileDialog();
@@ -204,7 +204,7 @@ namespace Trixter.XDream.Diagnostics
             // 
             // tpCrank
             // 
-            this.tpCrank.Controls.Add(this.tdCrankDetails);
+            this.tpCrank.Controls.Add(this.cdCrankDetails);
             this.tpCrank.Location = new System.Drawing.Point(4, 25);
             this.tpCrank.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tpCrank.Name = "tpCrank";
@@ -214,14 +214,14 @@ namespace Trixter.XDream.Diagnostics
             this.tpCrank.Text = "Crank";
             this.tpCrank.UseVisualStyleBackColor = true;
             // 
-            // tdCrankDetails
+            // cdCrankDetails
             // 
-            this.tdCrankDetails.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tdCrankDetails.Location = new System.Drawing.Point(3, 2);
-            this.tdCrankDetails.Margin = new System.Windows.Forms.Padding(1);
-            this.tdCrankDetails.Name = "tdCrankDetails";
-            this.tdCrankDetails.Size = new System.Drawing.Size(677, 548);
-            this.tdCrankDetails.TabIndex = 0;
+            this.cdCrankDetails.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cdCrankDetails.Location = new System.Drawing.Point(3, 2);
+            this.cdCrankDetails.Margin = new System.Windows.Forms.Padding(1);
+            this.cdCrankDetails.Name = "cdCrankDetails";
+            this.cdCrankDetails.Size = new System.Drawing.Size(677, 548);
+            this.cdCrankDetails.TabIndex = 0;
             // 
             // tpDriver
             // 
@@ -292,7 +292,7 @@ namespace Trixter.XDream.Diagnostics
         private System.Windows.Forms.SaveFileDialog dlgSaveFile;
         private System.Windows.Forms.ToolStripButton tsbUpdates;
         private System.Windows.Forms.TabPage tpCrank;
-        private CrankDetails tdCrankDetails;
+        private CrankDetails cdCrankDetails;
     }
 }
 
