@@ -25,6 +25,8 @@ namespace Trixter.XDream.Diagnostics.Controls
         bool paused = false;
         DateTimeOffset lastUpdate;
 
+        public DataAccess DataAccess { get; set; }
+
         public CrankDetails()
         {
             InitializeComponent();
@@ -61,8 +63,8 @@ namespace Trixter.XDream.Diagnostics.Controls
             this.pnlLabels.Controls.AddRange(labels);
 
             this.pnlLabels.Resize += (s, e) => { this.UpdatePositions(); };
-
-
+            
+            this.Enabled = false;
         }
 
         private void UpdatePositions()
@@ -80,7 +82,6 @@ namespace Trixter.XDream.Diagnostics.Controls
 
                 int y = origin.Y + (int)(Math.Sin(angle) * C);
                 int x = origin.X + (int)(Math.Cos(angle) * C);
-                int position = i + 1;
 
                 Label label = this.labels[i];
 
@@ -109,7 +110,7 @@ namespace Trixter.XDream.Diagnostics.Controls
             }
         }
 
-        public void UpdateSeries(bool force =false)
+        private void UpdateSeries(bool force = false)
         {
             lock (this.sync)
             {
@@ -117,10 +118,8 @@ namespace Trixter.XDream.Diagnostics.Controls
                 if (!force && paused)
                     return;
 
-                if (DateTimeOffset.UtcNow - this.lastUpdate < TimeSpan.FromMilliseconds(updateIntervalMilliseconds))
-                    return;
-
-                long then = DateTimeOffset.UtcNow.Ticks - TimeSpan.FromMilliseconds(currentPositionIntervalMilliseconds).Ticks;
+                long then = DateTimeOffset.UtcNow.Ticks -
+                            TimeSpan.FromMilliseconds(currentPositionIntervalMilliseconds).Ticks;
                 Color defaultColor = gbCrankDetails.BackColor;
 
                 for (int i = 0; i < labels.Length; i++)
@@ -134,8 +133,6 @@ namespace Trixter.XDream.Diagnostics.Controls
                         color = current;
                     this.labels[i].BackColor = color;
                 }
-
-                this.lastUpdate = DateTimeOffset.UtcNow;
             }
         }
 
@@ -144,6 +141,36 @@ namespace Trixter.XDream.Diagnostics.Controls
             lock (this.sync)
             {
                 this.crankPositionVisits[crankPosition - 1] = DateTimeOffset.UtcNow.Ticks;
+            }
+        }
+
+        public void UpdateDetails(bool forceSeries=false)
+        {
+            lock (this.sync)
+            {
+                if (DateTimeOffset.UtcNow.Subtract(this.lastUpdate).TotalMilliseconds < updateIntervalMilliseconds)
+                    return;
+
+                this.lastUpdate = DateTimeOffset.UtcNow;
+
+                this.UpdateSeries(forceSeries);
+
+                XDreamMachine xdm = this.DataAccess?.XDreamMachine;
+                XDreamState message = this.DataAccess?.LastMessage;
+
+                if (xdm == null || message == null)
+                {
+                    this.Enabled = false;
+
+                    this.lbCrankPositionValue.Text = "";
+                    this.lbCrankSpeedValue.Text = "";
+                    return;
+                }
+
+                this.Enabled = true;
+
+                this.lbCrankPositionValue.Text = message.CrankPosition.ToString();
+                this.lbCrankSpeedValue.Text = xdm.CrankMeter.RPM.ToString();
             }
         }
     }
