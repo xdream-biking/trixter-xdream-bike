@@ -1,129 +1,27 @@
-﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.0.31903.59
-MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Trixter.XDream.API", "Trixter.XDream.API\Trixter.XDream.API.csproj", "{AC953219-60C5-4615-A0EF-2D8C4453A0FB}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Trixter.XDream.API.Testing", "Trixter.XDream.API.Testing\Trixter.XDream.API.Testing.csproj", "{C68527A5-6EA1-4603-8BEE-85A89A25F6A3}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Trixter.XDream.Diagnostics", "Trixter.XDream.Diagnostics\Trixter.XDream.Diagnostics.csproj", "{31AA2944-8D0F-4108-A59C-A2B675595B75}"
-EndProject
-Project("{B7DD6F7E-DEF8-4E67-B5B7-07EF123DB6F0}") = "Trixter.XDream.Installer", "Trixter.XDream.Installer\Trixter.XDream.Installer.wixproj", "{CF7DF41D-757D-4AA1-8B98-046730D0FACC}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Installer", "Installer", "{67EB8205-A989-4ED8-8032-4C36AF9F4685}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Trixter.XDream.TestController", "Trixter.XDream.TestController\Trixter.XDream.TestController.csproj", "{43464F43-D57D-4E83-B11D-0FD86D6DFD3A}"
-EndProject
-Global
-	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any CPU = Debug|Any CPU
-		Debug|x64 = Debug|x64
-		Debug|x86 = Debug|x86
-		Release|Any CPU = Release|Any CPU
-		Release|x64 = Release|x64
-		Release|x86 = Release|x86
-		Signed Release|Any CPU = Signed Release|Any CPU
-		Signed Release|x64 = Signed Release|x64
-		Signed Release|x86 = Signed Release|x86
-	EndGlobalSection
-	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{AC953219-60C5-4615-A0EF-2D8C4453A0FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AC953219-60C5-4615-A0EF-2D8C4453A0FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AC953219-60C5-4615-A0EF-2D8C4453A0FB}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{AC953219-60C5-4615-A0EF-2D8C4453A0FB}.Debug|x64.Build.0 = Debug|Any CPU
-		{AC953219-60C5-4615-A0EF-2D8C4453A0FB}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{AC953219-60C5-4615-A0EF-2D8C4453A0FB}.Debug|x86.Build.0 = Debug|Any CPU
-		{AC953219-60C5-4615-A0EF-2D8C4453A0FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AC953219-60C5-4615-A0EF-2D8C4453A0FB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AC953219-60C5-4615-A0EF-2D8C4453A0FB}.Release|x64.ActiveCfg = Release|Any CPU
-		{AC953219-60C5-4615-A0EF-2D8C4453A0FB}.Release|x64.Build.0 = Release|Any CPU
-		{AC953219-60C5-4615-A0EF-2D8C4453A0FB}.Release|x86.ActiveCfg = Release|Any CPU
-		{AC953219-60C5-4615-A0EF-2D8C4453A0FB}.Release|x86.Build.0 = Release|Any CPU
-		{AC953219-60C5-4615-A0EF-2D8C4453A0FB}.Signed Release|Any CPU.ActiveCfg = Signed Release|Any CPU
-		{AC953219-60C5-4615-A0EF-2D8C4453A0FB}.Signed Release|Any CPU.Build.0 = Signed Release|Any CPU
-		{AC953219-60C5-4615-A0EF-2D8C4453A0FB}.Signed Release|x64.ActiveCfg = Signed Release|Any CPU
-		{AC953219-60C5-4615-A0EF-2D8C4453A0FB}.Signed Release|x64.Build.0 = Signed Release|Any CPU
-		{AC953219-60C5-4615-A0EF-2D8C4453A0FB}.Signed Release|x86.ActiveCfg = Signed Release|Any CPU
-		{AC953219-60C5-4615-A0EF-2D8C4453A0FB}.Signed Release|x86.Build.0 = Signed Release|Any CPU
-		{C68527A5-6EA1-4603-8BEE-85A89A25F6A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C68527A5-6EA1-4603-8BEE-85A89A25F6A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C68527A5-6EA1-4603-8BEE-85A89A25F6A3}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{C68527A5-6EA1-4603-8BEE-85A89A25F6A3}.Debug|x64.Build.0 = Debug|Any CPU
-		{C68527A5-6EA1-4603-8BEE-85A89A25F6A3}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{C68527A5-6EA1-4603-8BEE-85A89A25F6A3}.Debug|x86.Build.0 = Debug|Any CPU
-		{C68527A5-6EA1-4603-8BEE-85A89A25F6A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C68527A5-6EA1-4603-8BEE-85A89A25F6A3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C68527A5-6EA1-4603-8BEE-85A89A25F6A3}.Release|x64.ActiveCfg = Release|Any CPU
-		{C68527A5-6EA1-4603-8BEE-85A89A25F6A3}.Release|x64.Build.0 = Release|Any CPU
-		{C68527A5-6EA1-4603-8BEE-85A89A25F6A3}.Release|x86.ActiveCfg = Release|Any CPU
-		{C68527A5-6EA1-4603-8BEE-85A89A25F6A3}.Release|x86.Build.0 = Release|Any CPU
-		{C68527A5-6EA1-4603-8BEE-85A89A25F6A3}.Signed Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C68527A5-6EA1-4603-8BEE-85A89A25F6A3}.Signed Release|x64.ActiveCfg = Signed Release|Any CPU
-		{C68527A5-6EA1-4603-8BEE-85A89A25F6A3}.Signed Release|x64.Build.0 = Signed Release|Any CPU
-		{C68527A5-6EA1-4603-8BEE-85A89A25F6A3}.Signed Release|x86.ActiveCfg = Signed Release|Any CPU
-		{C68527A5-6EA1-4603-8BEE-85A89A25F6A3}.Signed Release|x86.Build.0 = Signed Release|Any CPU
-		{31AA2944-8D0F-4108-A59C-A2B675595B75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{31AA2944-8D0F-4108-A59C-A2B675595B75}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{31AA2944-8D0F-4108-A59C-A2B675595B75}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{31AA2944-8D0F-4108-A59C-A2B675595B75}.Debug|x64.Build.0 = Debug|Any CPU
-		{31AA2944-8D0F-4108-A59C-A2B675595B75}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{31AA2944-8D0F-4108-A59C-A2B675595B75}.Debug|x86.Build.0 = Debug|Any CPU
-		{31AA2944-8D0F-4108-A59C-A2B675595B75}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{31AA2944-8D0F-4108-A59C-A2B675595B75}.Release|Any CPU.Build.0 = Release|Any CPU
-		{31AA2944-8D0F-4108-A59C-A2B675595B75}.Release|x64.ActiveCfg = Release|Any CPU
-		{31AA2944-8D0F-4108-A59C-A2B675595B75}.Release|x64.Build.0 = Release|Any CPU
-		{31AA2944-8D0F-4108-A59C-A2B675595B75}.Release|x86.ActiveCfg = Release|Any CPU
-		{31AA2944-8D0F-4108-A59C-A2B675595B75}.Release|x86.Build.0 = Release|Any CPU
-		{31AA2944-8D0F-4108-A59C-A2B675595B75}.Signed Release|Any CPU.ActiveCfg = Signed Release|Any CPU
-		{31AA2944-8D0F-4108-A59C-A2B675595B75}.Signed Release|Any CPU.Build.0 = Signed Release|Any CPU
-		{31AA2944-8D0F-4108-A59C-A2B675595B75}.Signed Release|x64.ActiveCfg = Signed Release|Any CPU
-		{31AA2944-8D0F-4108-A59C-A2B675595B75}.Signed Release|x64.Build.0 = Signed Release|Any CPU
-		{31AA2944-8D0F-4108-A59C-A2B675595B75}.Signed Release|x86.ActiveCfg = Signed Release|Any CPU
-		{31AA2944-8D0F-4108-A59C-A2B675595B75}.Signed Release|x86.Build.0 = Signed Release|Any CPU
-		{CF7DF41D-757D-4AA1-8B98-046730D0FACC}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{CF7DF41D-757D-4AA1-8B98-046730D0FACC}.Debug|Any CPU.Build.0 = Debug|x86
-		{CF7DF41D-757D-4AA1-8B98-046730D0FACC}.Debug|x64.ActiveCfg = Debug|x86
-		{CF7DF41D-757D-4AA1-8B98-046730D0FACC}.Debug|x64.Build.0 = Debug|x86
-		{CF7DF41D-757D-4AA1-8B98-046730D0FACC}.Debug|x86.ActiveCfg = Debug|x86
-		{CF7DF41D-757D-4AA1-8B98-046730D0FACC}.Debug|x86.Build.0 = Debug|x86
-		{CF7DF41D-757D-4AA1-8B98-046730D0FACC}.Release|Any CPU.ActiveCfg = Release|x86
-		{CF7DF41D-757D-4AA1-8B98-046730D0FACC}.Release|Any CPU.Build.0 = Release|x86
-		{CF7DF41D-757D-4AA1-8B98-046730D0FACC}.Release|x64.ActiveCfg = Release|x86
-		{CF7DF41D-757D-4AA1-8B98-046730D0FACC}.Release|x64.Build.0 = Release|x86
-		{CF7DF41D-757D-4AA1-8B98-046730D0FACC}.Release|x86.ActiveCfg = Release|x86
-		{CF7DF41D-757D-4AA1-8B98-046730D0FACC}.Release|x86.Build.0 = Release|x86
-		{CF7DF41D-757D-4AA1-8B98-046730D0FACC}.Signed Release|Any CPU.ActiveCfg = Signed Release|x86
-		{CF7DF41D-757D-4AA1-8B98-046730D0FACC}.Signed Release|Any CPU.Build.0 = Signed Release|x86
-		{CF7DF41D-757D-4AA1-8B98-046730D0FACC}.Signed Release|x64.ActiveCfg = Signed Release|x64
-		{CF7DF41D-757D-4AA1-8B98-046730D0FACC}.Signed Release|x64.Build.0 = Signed Release|x64
-		{CF7DF41D-757D-4AA1-8B98-046730D0FACC}.Signed Release|x86.ActiveCfg = Signed Release|x86
-		{CF7DF41D-757D-4AA1-8B98-046730D0FACC}.Signed Release|x86.Build.0 = Signed Release|x86
-		{43464F43-D57D-4E83-B11D-0FD86D6DFD3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{43464F43-D57D-4E83-B11D-0FD86D6DFD3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{43464F43-D57D-4E83-B11D-0FD86D6DFD3A}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{43464F43-D57D-4E83-B11D-0FD86D6DFD3A}.Debug|x64.Build.0 = Debug|Any CPU
-		{43464F43-D57D-4E83-B11D-0FD86D6DFD3A}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{43464F43-D57D-4E83-B11D-0FD86D6DFD3A}.Debug|x86.Build.0 = Debug|Any CPU
-		{43464F43-D57D-4E83-B11D-0FD86D6DFD3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{43464F43-D57D-4E83-B11D-0FD86D6DFD3A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{43464F43-D57D-4E83-B11D-0FD86D6DFD3A}.Release|x64.ActiveCfg = Release|Any CPU
-		{43464F43-D57D-4E83-B11D-0FD86D6DFD3A}.Release|x64.Build.0 = Release|Any CPU
-		{43464F43-D57D-4E83-B11D-0FD86D6DFD3A}.Release|x86.ActiveCfg = Release|Any CPU
-		{43464F43-D57D-4E83-B11D-0FD86D6DFD3A}.Release|x86.Build.0 = Release|Any CPU
-		{43464F43-D57D-4E83-B11D-0FD86D6DFD3A}.Signed Release|Any CPU.ActiveCfg = Release|Any CPU
-		{43464F43-D57D-4E83-B11D-0FD86D6DFD3A}.Signed Release|x64.ActiveCfg = Signed Release|Any CPU
-		{43464F43-D57D-4E83-B11D-0FD86D6DFD3A}.Signed Release|x64.Build.0 = Signed Release|Any CPU
-		{43464F43-D57D-4E83-B11D-0FD86D6DFD3A}.Signed Release|x86.ActiveCfg = Signed Release|Any CPU
-		{43464F43-D57D-4E83-B11D-0FD86D6DFD3A}.Signed Release|x86.Build.0 = Signed Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{CF7DF41D-757D-4AA1-8B98-046730D0FACC} = {67EB8205-A989-4ED8-8032-4C36AF9F4685}
-	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {6A9739C9-A1F7-44F6-B107-9453AD8DA5F5}
-	EndGlobalSection
-EndGlobal
+﻿<Solution>
+  <Configurations>
+    <BuildType Name="Debug" />
+    <BuildType Name="Release" />
+    <BuildType Name="Signed Release" />
+    <Platform Name="Any CPU" />
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Folder Name="/Installer/">
+    <Project Path="Trixter.XDream.Installer/Trixter.XDream.Installer.wixproj" Type="b7dd6f7e-def8-4e67-b5b7-07ef123db6f0">
+      <Platform Solution="*|Any CPU" Project="x86" />
+      <Platform Solution="Debug|x64" Project="x86" />
+      <Platform Solution="Release|x64" Project="x86" />
+    </Project>
+  </Folder>
+  <Project Path="Trixter.XDream.API.Testing/Trixter.XDream.API.Testing.csproj">
+    <BuildType Solution="Signed Release|Any CPU" Project="Release" />
+    <Build Solution="Signed Release|Any CPU" Project="false" />
+  </Project>
+  <Project Path="Trixter.XDream.API/Trixter.XDream.API.csproj" />
+  <Project Path="Trixter.XDream.Diagnostics/Trixter.XDream.Diagnostics.csproj" />
+  <Project Path="Trixter.XDream.TestController/Trixter.XDream.TestController.csproj">
+    <BuildType Solution="Signed Release|Any CPU" Project="Release" />
+    <Build Solution="Signed Release|Any CPU" Project="false" />
+  </Project>
+</Solution>
