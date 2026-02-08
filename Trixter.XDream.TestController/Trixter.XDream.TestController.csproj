@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net48</TargetFramework>
@@ -11,23 +10,19 @@
     <Authors>David Mason</Authors>
     <Description>Test Controller to emulate a Trixter X-Dream V1 exercise bike.</Description>
     <Copyright>(C) David Mason 2021-2026</Copyright>
-    <AssemblyVersion>1.5.0</AssemblyVersion>
-    <FileVersion>1.5.0</FileVersion>
-	<FileVersion>1.5.0</FileVersion>
+    <Version>1.5.1</Version>
+    <AssemblyVersion>$(Version)</AssemblyVersion>
+    <FileVersion>$(Version)</FileVersion>
     <PackageLicenseFile>..\LICENSE.rtf</PackageLicenseFile>
+    <Configurations>Debug;Release;Signed Release</Configurations>
   </PropertyGroup>
-
-
-
   <ItemGroup>
     <Content Include="White-X.ico" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\Trixter.XDream.API\Trixter.XDream.API.csproj" />
     <ProjectReference Include="..\Trixter.XDream.Diagnostics\Trixter.XDream.Diagnostics.csproj" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Update="Properties\Settings.Designer.cs">
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
@@ -35,12 +30,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
   </ItemGroup>
-
   <ItemGroup>
     <None Update="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
-
 </Project>

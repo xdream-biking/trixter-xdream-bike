@@ -22,6 +22,7 @@ namespace Trixter.XDream.Diagnostics
             {
                 this.dataAccess = value;
                 this.dDetailsControl.DataAccess = value;
+                this.cdCrankDetails.DataAccess = value;
             }
         }
 
@@ -80,12 +81,15 @@ namespace Trixter.XDream.Diagnostics
                 }
 
                 if(message.Crank!=0 && message.Crank<=65534)
-                    this.tdCrankDetails.VisitCrankPosition(message.CrankPosition);
+                    this.cdCrankDetails.VisitCrankPosition(message.CrankPosition);
 
                 if (tcTabs.SelectedTab == this.tpDetails)
                     this.dDetailsControl.UpdateDetails();
-                else if(tcTabs.SelectedTab==this.tpCrank)
-                    this.tdCrankDetails.UpdateSeries();
+                else if (tcTabs.SelectedTab == this.tpCrank)
+                {
+                    this.cdCrankDetails.UpdateDetails();
+                }
+                    
 
             }
             finally
