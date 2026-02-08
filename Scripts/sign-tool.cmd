@@ -37,7 +37,6 @@ if not exist %signtool% set signtool="%SystemDrive%\Progra~2\%signToolRelative2%
 if not exist %signtool% (
     echo Signing tool not found:
     echo %signtool%
-	pause
 	exit /b 1
 )
 
