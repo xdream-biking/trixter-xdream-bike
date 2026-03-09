@@ -115,7 +115,9 @@ namespace Trixter.XDream.API
 
                 // wait a few ms for the processing to stop
                 for (DateTimeOffset start = DateTimeOffset.Now;
-                    this.queueProcessor.CancellationPending && DateTimeOffset.Now.Subtract(start).TotalMilliseconds < 500;) { }
+                    this.queueProcessor.CancellationPending && DateTimeOffset.Now.Subtract(start).TotalMilliseconds < 500;) {
+                    System.Threading.Thread.Sleep(50);
+                }
 
                 this.queueProcessor.Dispose();
                 this.queueProcessor = null;

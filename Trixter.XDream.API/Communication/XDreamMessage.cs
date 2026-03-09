@@ -6,7 +6,7 @@ using System.Text;
 namespace Trixter.XDream.API.Communications
 {
     [DebuggerDisplay("{DebuggerDisplay}")]
-    public class XDreamMessage : XDreamState    
+    public class XDreamMessage : XDreamState
     {
         /* Packet content
          *                            6A 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
@@ -28,7 +28,7 @@ namespace Trixter.XDream.API.Communications
          * (0F) XOR of 00..0E------------------------------------------------------+
          */
         internal const int MessageSize = 32;
-        
+
         public const int Error = -1;
 
         private const int packetLength = 16;
@@ -122,7 +122,7 @@ namespace Trixter.XDream.API.Communications
             result[0x06] = 255;
             result[0x07] = 255;
 
-            int notButtons = ~(int)state.Buttons;            
+            int notButtons = ~(int)state.Buttons;
 
             result[0x08] = (byte)(notButtons >> 8);
             result[0x09] = (byte)(notButtons & 0xFF);
@@ -142,12 +142,17 @@ namespace Trixter.XDream.API.Communications
                 return null;
 
             byte[] packetBytes = GetDataPacket(state);
-            return string.Join(string.Empty, packetBytes.Select(b=>b.ToString("x2")));
+            return string.Join(string.Empty, packetBytes.Select(b => b.ToString("x2")));
         }
 
-        internal static byte [] GetDataPacketTextBytes(XDreamState state) => Encoding.ASCII.GetBytes(GetDataPacketText(state));
-        
+        internal static byte[] GetDataPacketTextBytes(XDreamState state)
+        {
+            if (state == null)
+                throw new ArgumentNullException(nameof(state));
+            return Encoding.ASCII.GetBytes(GetDataPacketText(state));
+        }
+
     }
 
-    
+
 }
