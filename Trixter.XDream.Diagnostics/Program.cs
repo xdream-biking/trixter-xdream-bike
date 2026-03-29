@@ -19,8 +19,6 @@ namespace Trixter.XDream.Diagnostics
         [STAThread]
         static int Main(string[] args)
         {
-            
-            Settings.Default.Upgrade();
             DataAccess dataAccess = new DataAccess();
             UpdateManager updateManager = new UpdateManager(Settings.Default, Constants.GithubUpdateUrl);
 
