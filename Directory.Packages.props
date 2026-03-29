@@ -1,0 +1,21 @@
+<Project>
+  <!-- Central package versions for the solution. This enables NuGet Central Package Management (CPM).
+       Requires NuGet/dotnet SDK that supports Directory.Packages.props (NuGet 6+/VS2022+).
+  -->
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>True</ManagePackageVersionsCentrally>
+    <CentralPackageVersionsFileImported>True</CentralPackageVersionsFileImported>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageVersion Include="WixToolset.UI.wixext" Version="6.0.2" />
+    <PackageVersion Include="WixToolset.NetFx.wixext" Version="6.0.2" />
+    <PackageVersion Include="System.IO.Ports" Version="6.0.0" />
+    <PackageVersion Include="Newtonsoft.Json" Version="13.0.4" />
+    <PackageVersion Include="Com0Com.CSharp" Version="1.0.5" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.3.0" />
+    <PackageVersion Include="NUnit" Version="4.5.1" />
+    <PackageVersion Include="NUnit.Analyzers" Version="4.12.0" />
+    <PackageVersion Include="NUnit3TestAdapter" Version="6.2.0" />
+    <PackageVersion Include="coverlet.collector" Version="8.0.1" />
+  </ItemGroup>
+</Project>

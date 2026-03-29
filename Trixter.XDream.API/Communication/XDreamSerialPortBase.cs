@@ -13,7 +13,16 @@ namespace Trixter.XDream.API.Communications
 
         public bool IsDisposed { get; private set; } = false;
 
-        protected bool MessageTimerEnabled { get => this.messageTimer.Enabled; set => this.messageTimer.Enabled=value; }
+        protected bool MessageTimerEnabled 
+        { 
+            get => this.messageTimer != null ? this.messageTimer.Enabled : false; 
+            set { 
+                if (this.messageTimer == null) 
+                    throw new InvalidOperationException();
+                
+                this.messageTimer.Enabled = value; 
+            }
+        }
 
         /// <summary>
         /// Override to do something with an incoming packet.

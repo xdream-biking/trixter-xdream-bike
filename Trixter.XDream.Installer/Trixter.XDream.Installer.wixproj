@@ -2,6 +2,7 @@
   <PropertyGroup>
     <InstallerPlatform>x86</InstallerPlatform>
     <Configurations>Debug;Release;Signed Release</Configurations>
+    <ManagePackageVersionsCentrally>false</ManagePackageVersionsCentrally>
   </PropertyGroup>
   <ItemGroup>
     <Content Include="Definitions.wxi" />

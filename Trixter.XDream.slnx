@@ -1,27 +1,22 @@
-﻿<Solution>
+<Solution>
   <Configurations>
     <BuildType Name="Debug" />
     <BuildType Name="Release" />
     <BuildType Name="Signed Release" />
-    <Platform Name="Any CPU" />
-    <Platform Name="x64" />
-    <Platform Name="x86" />
   </Configurations>
   <Folder Name="/Installer/">
     <Project Path="Trixter.XDream.Installer/Trixter.XDream.Installer.wixproj" Type="b7dd6f7e-def8-4e67-b5b7-07ef123db6f0">
-      <Platform Solution="*|Any CPU" Project="x86" />
-      <Platform Solution="Debug|x64" Project="x86" />
-      <Platform Solution="Release|x64" Project="x86" />
+      <Platform Project="x86" />
     </Project>
   </Folder>
   <Project Path="Trixter.XDream.API.Testing/Trixter.XDream.API.Testing.csproj">
-    <BuildType Solution="Signed Release|Any CPU" Project="Release" />
-    <Build Solution="Signed Release|Any CPU" Project="false" />
+    <BuildType Solution="Signed Release|*" Project="Release" />
+    <Build Solution="Signed Release|*" Project="false" />
   </Project>
   <Project Path="Trixter.XDream.API/Trixter.XDream.API.csproj" />
   <Project Path="Trixter.XDream.Diagnostics/Trixter.XDream.Diagnostics.csproj" />
   <Project Path="Trixter.XDream.TestController/Trixter.XDream.TestController.csproj">
-    <BuildType Solution="Signed Release|Any CPU" Project="Release" />
-    <Build Solution="Signed Release|Any CPU" Project="false" />
+    <BuildType Solution="Signed Release|*" Project="Release" />
+    <Build Solution="Signed Release|*" Project="false" />
   </Project>
 </Solution>

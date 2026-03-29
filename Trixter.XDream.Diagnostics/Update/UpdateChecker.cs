@@ -3,11 +3,12 @@ using System.Threading.Tasks;
 using System;
 using System.Net.Http;
 using System.Linq;
+using System.Security.Authentication;
 using Newtonsoft.Json.Linq;
 
 
 
-namespace Trixter.XDream.Diagnostics
+namespace Trixter.XDream.Diagnostics.Update
 {
 
     class UpdateChecker
@@ -31,13 +32,26 @@ namespace Trixter.XDream.Diagnostics
             /// The published date of the release.
             /// </summary>
             public DateTime PublishedAt { get; }
-
+            
             public ReleaseInfo(Version release, string releaseName, DateTime publishedAt)
             {
                 Release = release;
                 ReleaseName = releaseName;
                 PublishedAt = publishedAt;
             }
+        }
+
+        /// <summary>
+        /// Returns the URI for the releases page for the specified repository.
+        /// </summary>
+        /// <param name="repo"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
+        public static Uri ReleasesUri(string repo)
+        {
+            if (string.IsNullOrEmpty(repo))
+                throw new ArgumentException(nameof(repo));
+            return new Uri(string.Format(githubReleaseUrlPattern, repo));
         }
 
         /// <summary>
@@ -103,7 +117,8 @@ namespace Trixter.XDream.Diagnostics
         /// <returns></returns>
         public async Task<ReleaseInfo[]> GetReleases()
         {
-            using (HttpClient client = new HttpClient())
+            using(HttpClientHandler handler = new HttpClientHandler { SslProtocols = SslProtocols.Tls12 | SslProtocols.Tls13})
+            using (HttpClient client = new HttpClient(handler, true))
             {
                 client.DefaultRequestHeaders.Add("User-Agent", "request");
 

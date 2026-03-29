@@ -20,15 +20,18 @@
     <Configurations>Debug;Release;Signed Release</Configurations>
   </PropertyGroup>
   <ItemGroup>
-    <None Remove="Resources\Refresh-16.png" />
-    <None Remove="Resources\Refresh-32.png" />
+
     <None Remove="Resources\Refresh.png" />
+    <None Remove="Resources\update-available.png" />
+    <None Remove="Resources\update-check-due.png" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="White-X.ico" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Refresh.png" />
+    <EmbeddedResource Include="Resources\update-available.png" />
+    <EmbeddedResource Include="Resources\update-check-due.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\README.md">
@@ -37,7 +40,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+    <PackageReference Include="Newtonsoft.Json" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Trixter.XDream.API\Trixter.XDream.API.csproj" />
@@ -52,6 +55,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Update="Properties\Resources.resx">
@@ -59,8 +67,14 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
 
-  <Target Condition="$(Configuration)=='Signed Release'"  Name="PostBuild" AfterTargets="PostBuildEvent">
+  <Target Condition="$(Configuration)=='Signed Release'" Name="PostBuild" AfterTargets="PostBuildEvent">
     <Exec Command="call ..\Scripts\sign-tool.cmd &quot;$(TargetPath)&quot; &quot;Trixter X-Dream Diagnostic Utilities&quot; " />
   </Target>
 </Project>

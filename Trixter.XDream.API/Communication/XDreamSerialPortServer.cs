@@ -125,7 +125,7 @@ namespace Trixter.XDream.API.Communications
                 
                 if (this.resistanceExpires == DateTimeOffset.MaxValue)
                     return;
-                double t = (this.resistanceExpires - DateTime.UtcNow).TotalMilliseconds;
+                double t = (this.resistanceExpires - DateTimeOffset.UtcNow).TotalMilliseconds;
                 if (t<=0)
                 {
                     this.Resistance = 0;

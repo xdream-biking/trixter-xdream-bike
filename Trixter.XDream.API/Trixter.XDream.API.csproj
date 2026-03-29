@@ -15,7 +15,7 @@
     <Configurations>Debug;Release;Signed Release</Configurations>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="System.IO.Ports" Version="6.0.0" />
+    <PackageReference Include="System.IO.Ports" />
   </ItemGroup>
 
   

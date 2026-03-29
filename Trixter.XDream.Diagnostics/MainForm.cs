@@ -1,19 +1,22 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using Trixter.XDream.API;
 using Trixter.XDream.API.Communications;
+using Trixter.XDream.Diagnostics.Properties;
+using Trixter.XDream.Diagnostics.Update;
 
 namespace Trixter.XDream.Diagnostics
 {
     public partial class MainForm : Form
     {
-        private const string updateRepo = "xdream-biking/trixter-xdream-bike";
         private object sync = new object();
         private DataAccess dataAccess;
+        private UpdateManager updateManager;
 
         public DataAccess DataAccess
         {
@@ -26,6 +29,58 @@ namespace Trixter.XDream.Diagnostics
             }
         }
 
+        internal UpdateManager UpdateManager
+        {
+            get => updateManager;
+            set
+            {
+                if(!object.ReferenceEquals(value, this.updateManager) && this.updateManager!=null)
+                    this.updateManager.UpdateStateChanged -= UpdateManagerOnUpdateStateChanged;
+
+                this.updateManager = value;
+                if (value != null)
+                {
+                    this.updateManager.UpdateStateChanged += UpdateManagerOnUpdateStateChanged;
+                    UpdateManagerOnUpdateStateChanged(this.updateManager, this.updateManager.UpdateState);
+                }
+
+            }
+        }
+
+        private void UpdateManagerOnUpdateStateChanged(object sender, UpdateState e)
+        {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new MethodInvoker(() => this.UpdateManagerOnUpdateStateChanged(sender, e)));
+                return;
+            }
+
+            ToolStripItemDisplayStyle style = ToolStripItemDisplayStyle.Text;
+            System.Drawing.Image image = null;
+            string tooltip = "Updates";
+            switch (e)
+            {
+                case UpdateState.UpdateAvailable:
+                    style = ToolStripItemDisplayStyle.ImageAndText;
+                    image = Resources.update_available;
+                    tooltip = "Update Available";
+                    break;
+                case UpdateState.UpdateCheckDue:
+                    style = ToolStripItemDisplayStyle.ImageAndText;
+                    image = Resources.update_check_due;
+                    tooltip = "Update Check Due";
+                    break;
+                case UpdateState.Error:
+                case UpdateState.UpToDate:
+                default:
+                    break;
+            }
+
+            tsUpdatesButton.DisplayStyle = style;
+            tsUpdatesButton.Image = image;
+            tsUpdatesButton.ToolTipText = tooltip;
+        }
+
         public MainForm()
         {
             InitializeComponent();
@@ -35,8 +90,18 @@ namespace Trixter.XDream.Diagnostics
             this.dDetailsControl.Enabled = false;
             this.tsbCapture.Enabled = false;
             this.tsbSave.Enabled = false;
+            this.tsUpdatesButton.DisplayStyle = ToolStripItemDisplayStyle.Text;
+
 
             this.dDetailsControl.DataAccess = this.DataAccess;
+
+            this.tsmiAutomatic.Checked = false;
+            this.tsmiManual.Checked = false;
+
+            if (Settings.Default.AutomaticUpdateChecksEnabled)
+                this.tsmiAutomatic.Checked = true;
+            else
+                this.tsmiManual.Checked = true;
         }
 
   
@@ -203,33 +268,52 @@ namespace Trixter.XDream.Diagnostics
 
         }
 
-        private async void tsbUpdates_Click(object sender, EventArgs e)
+        private async void tsmiCheckForUpdates_Click(object sender, EventArgs e)
         {
             try
             {
-                var updateChecker = new UpdateChecker(updateRepo);
-                var update = await updateChecker.GetLatestRelease();
-
-                if (update!=null)
+                var updateState = await this.updateManager.CheckForUpdates();
+                var latestRelease = this.updateManager.LatestRelease;
+                
+                if (latestRelease!=null)
                 {
-                   var dialogResult= MessageBox.Show(
-                        $"An update to {update.Release} is available. \r\n\r\nClick 'Yes' to open the releases page in a web browser.", "Update",
+                   var dialogResult= MessageBox.Show(this,
+                        $"An update to {latestRelease} is available. \r\n\r\nClick 'Yes' to open the releases page in a web browser.", "Update",
                         MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-
-                   if (dialogResult == DialogResult.Yes)
-                       System.Diagnostics.Process.Start(updateChecker.GithubReleaseUrl);
+                    ;
+                    if (dialogResult == DialogResult.Yes)
+                        System.Diagnostics.Process.Start(updateManager.ReleasesUri.AbsoluteUri);
                 }
                 else
-                    MessageBox.Show("No updates were found.", "Update", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(this,"No updates were found.", "Update", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch
             {
-                MessageBox.Show("Failed to check for updates.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(this, "Failed to check for updates.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+        
+        private void tsmiUpdateMode_Click(object sender, EventArgs e)
+        {
+            if (sender == tsmiAutomatic)
+            {
+                tsmiAutomatic.Checked = true;
+                tsmiManual.Checked = false;
+                Settings.Default.AutomaticUpdateChecksEnabled = true;
+            }
+            else if (sender == tsmiManual)
+            {
+                tsmiManual.Checked = true;
+                tsmiAutomatic.Checked = false;
+                Settings.Default.AutomaticUpdateChecksEnabled = false;
+            } 
 
-
+            Settings.Default.Save();
         }
 
-       
+        private void tsmiReleasesWebPage_Click(object sender, EventArgs e)
+        {
+            Process.Start(this.updateManager.ReleasesUri.AbsoluteUri);
+        }
     }
 }
